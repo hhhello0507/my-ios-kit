@@ -10,7 +10,7 @@ let package = Package(
         .library(
             name: "MyDesignSystem",
             targets: ["MyDesignSystem"]
-        ),
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/tevelee/SwiftUI-Flow.git", exact: "1.1.0"),
@@ -27,7 +27,8 @@ let package = Package(
                 .product(name: "MyUtil", package: "my-ios-util")
             ],
             resources: [
-                .process("Foundation/Typography/Font")
+                .process("Foundation/Typography/Font"),
+                .process("Resources")
             ]
         )
     ]
