@@ -28,7 +28,7 @@ let package = Package(
             ],
             resources: [
                 .process("Foundation/Typography/Font"),
-                .process("Resources/Assets.xcassets")
+                .process("Resources")
             ]
         )
     ]
