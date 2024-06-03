@@ -58,10 +58,16 @@ public struct GrowAvatar: View {
             .growColor(.avatarBackground)
             .frame(width: type.size, height: type.size)
             .overlay {
-                Image(.person)
+                Image(icon: .person)
                     .resizable()
                     .growIconColor(.avatarLabel)
                     .frame(width: type.size / 2, height: type.size / 2)
             }
     }
+}
+
+#Preview {
+    GrowAvatar(type: .extraLarge)
+        .registerWanted()
+        .environmentObject(ColorProvider(isDarkTheme: false))
 }

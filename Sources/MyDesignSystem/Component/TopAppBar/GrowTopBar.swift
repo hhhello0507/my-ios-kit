@@ -43,7 +43,7 @@ public struct GrowTopAppBar<C>: View where C: View {
                         Button {
                             backButtonAction()
                         } label: {
-                            Image(.expandLeft)
+                            Image(icon: .expandLeft)
                                 .resizable()
                                 .growIconColor(.textNormal)
                                 .frame(size: 28)
