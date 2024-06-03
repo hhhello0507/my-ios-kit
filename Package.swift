@@ -9,7 +9,6 @@ let package = Package(
     products: [
         .library(
             name: "MyDesignSystem",
-            type: .dynamic,
             targets: ["MyDesignSystem"]
         )
     ],
@@ -29,7 +28,7 @@ let package = Package(
             ],
             resources: [
                 .process("Foundation/Typography/Font"),
-                .process("Resources")
+                .process("Resources/Assets.xcassets")
             ]
         )
     ]
