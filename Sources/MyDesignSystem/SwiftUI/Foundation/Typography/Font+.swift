@@ -14,7 +14,7 @@ public extension Font {
     }
 }
 
-public enum GrowFont: CaseIterable {
+public enum MyFont: CaseIterable {
     case title1B
     case title1M
     case title1R
@@ -71,16 +71,16 @@ public enum GrowFont: CaseIterable {
 }
 
 public extension View {
-    func growFont(_ growFont: GrowFont) -> some View {
-        self.font(growFont.font)
+    func myFont(_ myFont: MyFont) -> some View {
+        self.font(myFont.font)
     }
 }
 
 #Preview {
     VStack {
-        ForEach(GrowFont.allCases, id: \.self) {
+        ForEach(MyFont.allCases, id: \.self) {
             Text("Hello World")
-                .growFont($0)
+                .myFont($0)
         }
     }
     .registerWanted()

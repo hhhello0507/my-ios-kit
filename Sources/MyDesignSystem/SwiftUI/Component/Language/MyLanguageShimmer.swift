@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowLanguageShimmer: View {
+public struct MyLanguageShimmer: View {
     
     public init() {}
     

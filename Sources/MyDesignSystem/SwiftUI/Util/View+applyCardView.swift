@@ -3,8 +3,8 @@ import SwiftUI
 public extension View {
     func applyCardView() -> some View {
         self
-            .growElevation(.evBlack1)
-            .growBackground(.background)
+            .myElevation(.evBlack1)
+            .myBackground(.background)
             .cornerRadius(12, corners: .allCorners)
     }
 }

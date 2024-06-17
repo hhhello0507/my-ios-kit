@@ -1,9 +1,9 @@
 import SwiftUI
 
 public extension Image {
-    func growIconColor(_ color: GrowColorScheme) -> some View {
+    func myIconColor(_ color: MyColorScheme) -> some View {
         self
             .renderingMode(.template)
-            .growColor(color)
+            .myColor(color)
     }
 }

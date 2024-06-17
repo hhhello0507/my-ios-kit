@@ -1,8 +1,8 @@
 import SwiftUI
 
-public class GrowPallete {
+public class MyPallete {
     private init() {}
-    public static let shared = GrowPallete()
+    public static let shared = MyPallete()
     
     /*
     Neutral Color

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum GrowIconography {
+public enum MyIconography {
     case add
     case addRing
     case arrowDown

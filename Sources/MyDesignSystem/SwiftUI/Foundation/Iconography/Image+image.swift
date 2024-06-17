@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension Image {
-    init(image: GrowImage) {
+    init(image: MyImage) {
         self = Image(image.image, bundle: .module)
     }
 }

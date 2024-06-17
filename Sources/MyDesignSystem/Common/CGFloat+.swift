@@ -1,5 +1,5 @@
 import Foundation
 
 public extension CGFloat {
-    static let growLineSpacing: CGFloat = 4
+    static let myLineSpacing: CGFloat = 4
 }

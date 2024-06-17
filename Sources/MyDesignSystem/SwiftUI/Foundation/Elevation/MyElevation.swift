@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum GrowElevation {
+public enum MyElevation {
     case evBlack1
     case evBlack2
     case evBlack3

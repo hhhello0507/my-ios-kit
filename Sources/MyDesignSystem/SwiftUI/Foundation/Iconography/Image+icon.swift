@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension Image {
-    init(icon: GrowIconography) {
+    init(icon: MyIconography) {
         self = Image(icon.icon, bundle: .module)
     }
 }

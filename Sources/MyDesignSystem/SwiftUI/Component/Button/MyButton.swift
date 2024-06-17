@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowButton: View {
+public struct MyButton: View {
     
     // MARK: - State
     @State private var isLoading = false
@@ -9,8 +9,8 @@ public struct GrowButton: View {
     // MARK: - Parameters
     private let text: String
     private let type: ButtonType
-    private let leadingIcon: GrowIconography?
-    private let trailingIcon: GrowIconography?
+    private let leadingIcon: MyIconography?
+    private let trailingIcon: MyIconography?
     private let isEnabled: Bool
     private let isRounded: Bool
     private let action: () async -> Void
@@ -18,8 +18,8 @@ public struct GrowButton: View {
     public init(
         _ text: String,
         type: ButtonType,
-        leadingIcon: GrowIconography? = nil,
-        trailingIcon: GrowIconography? = nil,
+        leadingIcon: MyIconography? = nil,
+        trailingIcon: MyIconography? = nil,
         isEnabled: Bool = true,
         isRounded: Bool = false,
         action: @escaping () async -> Void
@@ -34,7 +34,7 @@ public struct GrowButton: View {
     }
     
     public var body: some View {
-        let color: GrowColorScheme = isEnabled ? .buttonText : .buttonTextDisabled
+        let color: MyColorScheme = isEnabled ? .buttonText : .buttonTextDisabled
         
         Button {
             guard isEnabled, !isLoading else { return }
@@ -48,12 +48,12 @@ public struct GrowButton: View {
                 if let leadingIcon {
                     Image(icon: leadingIcon)
                         .resizable()
-                        .growIconColor(color)
+                        .myIconColor(color)
                         .frame(size: 20)
                 }
                 Text(text)
-                    .growColor(color)
-                    .growFont(type.font)
+                    .myColor(color)
+                    .myFont(type.font)
                     .opacity(isLoading ? 0 : 1)
                     .overlay {
                         if isLoading {
@@ -64,18 +64,18 @@ public struct GrowButton: View {
                 if let trailingIcon {
                     Image(icon: trailingIcon)
                         .resizable()
-                        .growIconColor(color)
+                        .myIconColor(color)
                         .frame(size: 20)
                 }
             }
             .padding(.horizontal, type.horizontalPadding)
         }
-        .buttonStyle(GrowButtonStyle(isLoading: isLoading, isEnabled: isEnabled, isRounded: isRounded, type: type))
+        .buttonStyle(MyButtonStyle(isLoading: isLoading, isEnabled: isEnabled, isRounded: isRounded, type: type))
         .disabled(isLoading)
     }
 }
 
-struct GrowButtonStyle: ButtonStyle {
+struct MyButtonStyle: ButtonStyle {
     private let isLoading: Bool
     private let isEnabled: Bool
     private let isRounded: Bool
@@ -95,14 +95,14 @@ struct GrowButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         
-        let background: GrowColorScheme = isEnabled ? .buttonPrimary : .buttonPrimaryDisabled
+        let background: MyColorScheme = isEnabled ? .buttonPrimary : .buttonPrimaryDisabled
         
         configuration.label
             .frame(height: type.height)
             .if(type == .CTA) {
                 $0.frame(maxWidth: .infinity)
             }
-            .growBackground(background)
+            .myBackground(background)
             .cornerRadius(isRounded ? type.height / 2 : type.cornerRadius, corners: .allCorners)
             .if(isEnabled) {
                 $0.addPressAnimation(configuration.isPressed)
@@ -112,7 +112,7 @@ struct GrowButtonStyle: ButtonStyle {
 
 #Preview {
     VStack {
-        GrowButton("시작하기", type: .CTA) {}
+        MyButton("시작하기", type: .CTA) {}
         Text("Hello")
     }
     .registerWanted()

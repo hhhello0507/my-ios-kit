@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowTextEditor: View {
+public struct MyTextEditor: View {
     
     // MARK: - State
     @EnvironmentObject private var colorProvider: ColorProvider
@@ -23,9 +23,9 @@ public struct GrowTextEditor: View {
     
     // MARK: - View
     public var body: some View {
-        let strokeColor: GrowColorScheme = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
-        let textColor: GrowColorScheme = !isEnabled ? text.isEmpty ? .textAlt : .textFieldTextDisabled : .textNormal
-        let iconColor: GrowColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
+        let strokeColor: MyColorScheme = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
+        let textColor: MyColorScheme = !isEnabled ? text.isEmpty ? .textAlt : .textFieldTextDisabled : .textNormal
+        let iconColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
         let radius: CGFloat = isRounded ? 26 : 12
         TextEditor(
             text: $text
@@ -36,12 +36,12 @@ public struct GrowTextEditor: View {
         .textContentType(.init(rawValue: ""))
         .textEditorBackground(.clear)
         .focused($isFocused)
-        .growFont(.bodyM)
+        .myFont(.bodyM)
         .cornerRadius(radius, corners: .allCorners)
         .padding(.vertical, 8)
         .padding(.horizontal, 12) // for inner padding
         .accentColor(colorProvider.color(.textFieldPrimary)) // for indicator color
-        .growColor(textColor) // for text color
+        .myColor(textColor) // for text color
         .stroke(radius, content: colorProvider.color(strokeColor), lineWidth: 1.5) // for stroke color
         .onTapGesture {
             isFocused = true

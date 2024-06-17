@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct GrowToggle: View {
+public struct MyToggle: View {
     
     @Binding var isOn: Bool
     
@@ -20,7 +20,7 @@ public struct GrowToggle: View {
     
     public var body: some View {
         Toggle("", isOn: $isOn)
-            .growTint(isOn ? .buttonPrimary : .buttonTextDisabled)
+            .myTint(isOn ? .buttonPrimary : .buttonTextDisabled)
             .fixedSize()
     }
 }

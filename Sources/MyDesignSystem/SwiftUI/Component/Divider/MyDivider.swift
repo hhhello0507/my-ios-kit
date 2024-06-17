@@ -12,14 +12,14 @@ public enum DividerType {
     }
 }
 
-public struct GrowDivider: View {
+public struct MyDivider: View {
     
     private let type: DividerType
-    private let color: GrowColorScheme
+    private let color: MyColorScheme
     
     public init(
         type: DividerType = .thin,
-        color: GrowColorScheme = .dividerNormal
+        color: MyColorScheme = .dividerNormal
     ) {
         self.type = type
         self.color = color
@@ -29,6 +29,6 @@ public struct GrowDivider: View {
         Rectangle()
             .frame(maxWidth: .infinity)
             .frame(height: type.height)
-            .growColor(color)
+            .myColor(color)
     }
 }

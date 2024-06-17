@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowAvatarShimmer: View {
+public struct MyAvatarShimmer: View {
     
     private let type: AvatarType
     

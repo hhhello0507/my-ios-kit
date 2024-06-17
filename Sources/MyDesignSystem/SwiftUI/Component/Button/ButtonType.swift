@@ -33,7 +33,7 @@ public enum ButtonType: CaseIterable {
         }
     }
     
-    var font: GrowFont {
+    var font: MyFont {
         switch self {
         case .CTA: .bodyB
         case .Large: .bodyB

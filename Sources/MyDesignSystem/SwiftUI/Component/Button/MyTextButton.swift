@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowTextButton: View {
+public struct MyTextButton: View {
     
     // MARK: - State
     @State private var isLoading = false
@@ -9,16 +9,16 @@ public struct GrowTextButton: View {
     // MARK: - Parameters
     private let text: String
     private let type: ButtonType
-    private let leadingIcon: GrowIconography?
-    private let trailingIcon: GrowIconography?
+    private let leadingIcon: MyIconography?
+    private let trailingIcon: MyIconography?
     private let isEnabled: Bool
     private let action: () async -> Void
     
     public init(
         _ text: String,
         type: ButtonType,
-        leadingIcon: GrowIconography? = nil,
-        trailingIcon: GrowIconography? = nil,
+        leadingIcon: MyIconography? = nil,
+        trailingIcon: MyIconography? = nil,
         isEnabled: Bool = true,
         action: @escaping () async -> Void
     ) {
@@ -32,7 +32,7 @@ public struct GrowTextButton: View {
     
     public var body: some View {
         
-        let color: GrowColorScheme = isEnabled ? .buttonPrimary : .buttonTextDisabled
+        let color: MyColorScheme = isEnabled ? .buttonPrimary : .buttonTextDisabled
         
         Button {
             guard isEnabled, !isLoading else { return }
@@ -46,12 +46,12 @@ public struct GrowTextButton: View {
                 if let leadingIcon {
                     Image(icon: leadingIcon)
                         .resizable()
-                        .growIconColor(color)
+                        .myIconColor(color)
                         .frame(size: 20)
                 }
                 Text(text)
-                    .growColor(color)
-                    .growFont(type.font)
+                    .myColor(color)
+                    .myFont(type.font)
                     .opacity(isLoading ? 0 : 1)
                     .overlay {
                         if isLoading {
@@ -62,18 +62,18 @@ public struct GrowTextButton: View {
                 if let trailingIcon {
                     Image(icon: trailingIcon)
                         .resizable()
-                        .growIconColor(color)
+                        .myIconColor(color)
                         .frame(size: 20)
                 }
             }
             .padding(.horizontal, type.horizontalPadding)
         }
-        .buttonStyle(GrowTextButtonStyle(isLoading: isLoading, isEnabled: isEnabled, type: type))
+        .buttonStyle(MyTextButtonStyle(isLoading: isLoading, isEnabled: isEnabled, type: type))
         .disabled(isLoading)
     }
 }
 
-struct GrowTextButtonStyle: ButtonStyle {
+struct MyTextButtonStyle: ButtonStyle {
     private let isLoading: Bool
     private let isEnabled: Bool
     private let type: ButtonType

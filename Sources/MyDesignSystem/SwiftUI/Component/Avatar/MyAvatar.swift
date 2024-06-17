@@ -21,7 +21,7 @@ public enum AvatarType: CaseIterable {
     }
 }
 
-public struct GrowAvatar: View {
+public struct MyAvatar: View {
     
     private let url: String?
     private let type: AvatarType
@@ -42,7 +42,7 @@ public struct GrowAvatar: View {
                } else if state.error != nil {
                    label
                } else {
-                   GrowAvatarShimmer(type: type)
+                   MyAvatarShimmer(type: type)
                }
             }
             .processors([.resize(size: .init(width: type.size, height: type.size), unit: .pixels)])
@@ -55,19 +55,19 @@ public struct GrowAvatar: View {
     @ViewBuilder
     private var label: some View {
         Circle()
-            .growColor(.avatarBackground)
+            .myColor(.avatarBackground)
             .frame(width: type.size, height: type.size)
             .overlay {
                 Image(icon: .person)
                     .resizable()
-                    .growIconColor(.avatarLabel)
+                    .myIconColor(.avatarLabel)
                     .frame(width: type.size / 2, height: type.size / 2)
             }
     }
 }
 
 #Preview {
-    GrowAvatar(type: .extraLarge)
+    MyAvatar(type: .extraLarge)
         .registerWanted()
         .environmentObject(ColorProvider(isDarkTheme: false))
 }

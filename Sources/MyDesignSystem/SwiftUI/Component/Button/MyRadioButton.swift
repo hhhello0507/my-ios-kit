@@ -1,18 +1,18 @@
 import SwiftUI
 
-public struct GrowRadioButton: View {
+public struct MyRadioButton: View {
     
     @EnvironmentObject private var colorProvider: ColorProvider
     private let text: String
-    private let selectedIcon: GrowIconography
-    private let unselectedIcon: GrowIconography
+    private let selectedIcon: MyIconography
+    private let unselectedIcon: MyIconography
     private let isSelected: Bool
     private let action: () -> Void
     
     public init(
         _ text: String,
-        selectedIcon: GrowIconography = .radio,
-        unselectedIcon: GrowIconography = .radioUnselected,
+        selectedIcon: MyIconography = .radio,
+        unselectedIcon: MyIconography = .radioUnselected,
         isSelected: Bool,
         action: @escaping () -> Void
     ) {
@@ -25,8 +25,8 @@ public struct GrowRadioButton: View {
     
     public var body: some View {
         
-        let primary: GrowColorScheme = isSelected ? .radioButtonPrimary : .radioButtonPrimaryDisabled
-        let secondary: GrowColorScheme = isSelected ? .radioButtonSecondary : .radioButtonSecondaryDisabled
+        let primary: MyColorScheme = isSelected ? .radioButtonPrimary : .radioButtonPrimaryDisabled
+        let secondary: MyColorScheme = isSelected ? .radioButtonSecondary : .radioButtonSecondaryDisabled
         
         Button {
             action()
@@ -36,11 +36,11 @@ public struct GrowRadioButton: View {
             HStack(spacing: 6) {
                 Image(icon: isSelected ? selectedIcon : unselectedIcon)
                     .resizable()
-                    .growIconColor(primary)
+                    .myIconColor(primary)
                     .frame(size: 24)
                 Text(text)
-                    .growFont(.bodyM)
-                    .growColor(secondary)
+                    .myFont(.bodyM)
+                    .myColor(secondary)
             }
             .padding(.horizontal, 14)
             .frame(height: 44)

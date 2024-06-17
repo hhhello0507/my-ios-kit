@@ -10,19 +10,15 @@ public extension Color {
             opacity: alpha
         )
     }
-    
-    func growColor(_ growColor: GrowColorScheme) -> some View {
-        self
-    }
 }
 
-public struct GrowColorViewModifier: ViewModifier {
+public struct MyColorViewModifier: ViewModifier {
     
     @EnvironmentObject private var colorProvider: ColorProvider
-    private let color: GrowColorScheme
+    private let color: MyColorScheme
     
     public init(
-        color: GrowColorScheme
+        color: MyColorScheme
     ) {
         self.color = color
     }
@@ -34,13 +30,13 @@ public struct GrowColorViewModifier: ViewModifier {
 }
 
 
-public struct GrowBackgroundViewModifier: ViewModifier {
+public struct MyBackgroundViewModifier: ViewModifier {
     
     @EnvironmentObject private var colorProvider: ColorProvider
-    private let color: GrowColorScheme
+    private let color: MyColorScheme
     
     public init(
-        color: GrowColorScheme
+        color: MyColorScheme
     ) {
         self.color = color
     }
@@ -51,13 +47,13 @@ public struct GrowBackgroundViewModifier: ViewModifier {
     }
 }
 
-public struct GrowTintViewModifier: ViewModifier {
+public struct MyTintViewModifier: ViewModifier {
     
     @EnvironmentObject private var colorProvider: ColorProvider
-    private let color: GrowColorScheme
+    private let color: MyColorScheme
     
     public init(
-        color: GrowColorScheme
+        color: MyColorScheme
     ) {
         self.color = color
     }
@@ -69,19 +65,19 @@ public struct GrowTintViewModifier: ViewModifier {
 }
 
 public extension View {
-    func growColor(_ color: GrowColorScheme) -> some View {
+    func myColor(_ color: MyColorScheme) -> some View {
         self
-            .modifier(GrowColorViewModifier(color: color))
+            .modifier(MyColorViewModifier(color: color))
     }
     
-    func growBackground(_ color: GrowColorScheme) -> some View {
+    func myBackground(_ color: MyColorScheme) -> some View {
         self
-            .modifier(GrowBackgroundViewModifier(color: color))
+            .modifier(MyBackgroundViewModifier(color: color))
     }
     
-    func growTint(_ color: GrowColorScheme) -> some View {
+    func myTint(_ color: MyColorScheme) -> some View {
         self
-            .modifier(GrowTintViewModifier(color: color))
+            .modifier(MyTintViewModifier(color: color))
     }
 }
 
@@ -97,7 +93,7 @@ public class ColorProvider: ObservableObject {
         self.isDarkTheme = isDarkTheme
     }
     
-    public func color(_ color: GrowColorScheme) -> Color {
+    public func color(_ color: MyColorScheme) -> Color {
         isDarkTheme ? color.darkColor : color.lightColor
     }
 }

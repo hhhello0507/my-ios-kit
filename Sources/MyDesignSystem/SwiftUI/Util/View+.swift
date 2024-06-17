@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GrowAnimationButton: ButtonStyle {
+struct MyAnimationButton: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .addPressAnimation(configuration.isPressed)
@@ -19,7 +19,7 @@ public extension View {
     
     func applyAnimation() -> some View {
         self
-            .buttonStyle(GrowAnimationButton())
+            .buttonStyle(MyAnimationButton())
     }
 }
 

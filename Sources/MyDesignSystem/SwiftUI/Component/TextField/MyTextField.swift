@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowTextField: View {
+public struct MyTextField: View {
     
     // MARK: - State
     @EnvironmentObject private var colorProvider: ColorProvider
@@ -42,11 +42,11 @@ public struct GrowTextField: View {
                     text: $text,
                     prompt: Text(hint).foregroundColor(colorProvider.color(.textAlt))
                 )
-                .growColor(text.isEmpty ? .textAlt : .textNormal)
+                .myColor(text.isEmpty ? .textAlt : .textNormal)
             }
         }
         .textFieldStyle(
-            GrowTextFieldStyle(
+            MyTextFieldStyle(
                 text: $text,
                 isSecured: isSecured,
                 isHide: $isHide,
@@ -58,7 +58,7 @@ public struct GrowTextField: View {
     }
 }
 
-struct GrowTextFieldStyle: TextFieldStyle {
+struct MyTextFieldStyle: TextFieldStyle {
     
     // MARK: - State
     @EnvironmentObject private var colorProvider: ColorProvider
@@ -86,21 +86,21 @@ struct GrowTextFieldStyle: TextFieldStyle {
     }
     
     func _body(configuration: TextField<Self._Label>) -> some View {
-        let strokeColor: GrowColorScheme = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
-        let textColor: GrowColorScheme = !isEnabled ? .textFieldTextDisabled : .textNormal
-        let iconColor: GrowColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
+        let strokeColor: MyColorScheme = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
+        let textColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textNormal
+        let iconColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
         let radius: CGFloat = isRounded ? 26 : 12
         return configuration
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
             .textContentType(.init(rawValue: ""))
             .focused($isFocused)
-            .growFont(.bodyM)
+            .myFont(.bodyM)
             .frame(height: 52)
             .cornerRadius(radius, corners: .allCorners)
             .padding(.horizontal, 12) // for inner padding
             .accentColor(colorProvider.color(.textFieldPrimary)) // for indicator color
-            .growColor(textColor) // for text color
+            .myColor(textColor) // for text color
             .stroke(radius, content: colorProvider.color(strokeColor), lineWidth: 1.5) // for stroke color
             .overlay(
                 HStack(spacing: 0) {
@@ -110,14 +110,14 @@ struct GrowTextFieldStyle: TextFieldStyle {
                             if isSecured {
                                 Image(icon: isHide ? .hide : .show)
                                     .resizable()
-                                    .growIconColor(iconColor)
+                                    .myIconColor(iconColor)
                                     .onTapGesture {
                                         isHide.toggle()
                                     }
                             } else if !text.isEmpty {
                                 Image(icon: .closeFill)
                                     .resizable()
-                                    .growIconColor(iconColor)
+                                    .myIconColor(iconColor)
                                     .onTapGesture {
                                         text = ""
                                     }

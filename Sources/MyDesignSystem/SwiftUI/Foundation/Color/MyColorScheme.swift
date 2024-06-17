@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum GrowColorScheme {
+public enum MyColorScheme {
     case textNormal
     case textDarken
     case textAlt

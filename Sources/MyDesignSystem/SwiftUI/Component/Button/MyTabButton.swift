@@ -1,21 +1,21 @@
 import SwiftUI
 
-public struct GrowTabButton: View {
+public struct MyTabButton: View {
     
     // MARK: - State
     @EnvironmentObject private var colorProvider: ColorProvider
     
     // MARK: - Parameters
     private let text: String
-    private let leadingIcon: GrowIconography?
-    private let trailingIcon: GrowIconography?
+    private let leadingIcon: MyIconography?
+    private let trailingIcon: MyIconography?
     private let isSelected: Bool
     private let action: () async -> Void
     
     public init(
         _ text: String,
-        leadingIcon: GrowIconography? = nil,
-        trailingIcon: GrowIconography? = nil,
+        leadingIcon: MyIconography? = nil,
+        trailingIcon: MyIconography? = nil,
         isSelected: Bool,
         action: @escaping () async -> Void
     ) {
@@ -28,7 +28,7 @@ public struct GrowTabButton: View {
     
     public var body: some View {
         
-        let color: GrowColorScheme = isSelected ? .tabButtonPrimary : .buttonTextDisabled
+        let color: MyColorScheme = isSelected ? .tabButtonPrimary : .buttonTextDisabled
         
         Button {
             Task {
@@ -39,16 +39,16 @@ public struct GrowTabButton: View {
                 if let leadingIcon {
                     Image(icon: leadingIcon)
                         .resizable()
-                        .growIconColor(color)
+                        .myIconColor(color)
                         .frame(size: 20)
                 }
                 Text(text)
-                    .growColor(color)
-                    .growFont(.bodyM)
+                    .myColor(color)
+                    .myFont(.bodyM)
                 if let trailingIcon {
                     Image(icon: trailingIcon)
                         .resizable()
-                        .growIconColor(color)
+                        .myIconColor(color)
                         .frame(size: 20)
                 }
             }
@@ -58,7 +58,7 @@ public struct GrowTabButton: View {
         .overlay {
             Rectangle()
                 .frame(height: 1)
-                .growColor(color)
+                .myColor(color)
                 .opacity(isSelected ? 1 : 0)
                 .frame(maxWidth: .infinity)
                 .toBottom()

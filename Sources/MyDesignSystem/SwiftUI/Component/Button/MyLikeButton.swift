@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowLikeButton: View {
+public struct MyLikeButton: View {
     
     // MARK: - State
     @EnvironmentObject private var colorProvider: ColorProvider
@@ -22,8 +22,8 @@ public struct GrowLikeButton: View {
     
     public var body: some View {
         
-        let color: GrowColorScheme = isLiked ? .likePrimary : .likePrimaryDisabled
-        let background: GrowColorScheme = isLiked ? .likeSecondary : .likeSecondaryDisabled
+        let color: MyColorScheme = isLiked ? .likePrimary : .likePrimaryDisabled
+        let background: MyColorScheme = isLiked ? .likeSecondary : .likeSecondaryDisabled
         
         Button {
             Task {
@@ -33,15 +33,15 @@ public struct GrowLikeButton: View {
             HStack(spacing: 4) {
                 Image(icon: .heart)
                     .resizable()
-                    .growIconColor(color)
+                    .myIconColor(color)
                     .frame(size: 24)
                 Text("\(like)")
-                    .growColor(color)
-                    .growFont(.bodyB)
+                    .myColor(color)
+                    .myFont(.bodyB)
             }
             .padding(.horizontal, 6)
             .frame(height: 36)
-            .growBackground(background)
+            .myBackground(background)
             .cornerRadius(4, corners: .allCorners)
         }
     }

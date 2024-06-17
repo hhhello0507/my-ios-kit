@@ -8,20 +8,20 @@
 
 import SwiftUI
 
-public struct GrowTopAppBar<C>: View where C: View {
+public struct MyTopAppBar<C>: View where C: View {
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorProvider: ColorProvider
     
     private let title: String
-    private let background: GrowColorScheme
+    private let background: MyColorScheme
     private let content: () -> C
     private let backButtonAction: (() -> Void)?
     private let trailingContent: AnyView
     
     public init(
         title: String,
-        background: GrowColorScheme,
+        background: MyColorScheme,
         backButtonAction: (() -> Void)?,
         trailingContent: AnyView = AnyView(EmptyView()),
         @ViewBuilder content: @escaping () -> C
@@ -45,20 +45,20 @@ public struct GrowTopAppBar<C>: View where C: View {
                         } label: {
                             Image(icon: .expandLeft)
                                 .resizable()
-                                .growIconColor(.textNormal)
+                                .myIconColor(.textNormal)
                                 .frame(size: 28)
                                 .padding(2)
                         }
                     }
                     Text(title)
-                        .growFont(backButtonAction == nil ? .title2B : .headline2M)
-                        .growColor(.textNormal)
+                        .myFont(backButtonAction == nil ? .title2B : .headline2M)
+                        .myColor(.textNormal)
                         .padding(.leading, 8)
                     Spacer()
                     trailingContent
                 }
                 .frame(height: 54)
-                .growBackground(background)
+                .myBackground(background)
                 .padding(.horizontal, 4)
                 content()
             }
@@ -69,13 +69,13 @@ public struct GrowTopAppBar<C>: View where C: View {
 }
 
 public extension View {
-    func growTopBar<TC>(
+    func myTopBar<TC>(
         _ title: String,
-        background: GrowColorScheme = .background,
+        background: MyColorScheme = .background,
         @ViewBuilder trailingContent: @escaping () -> TC = { EmptyView() },
         backButtonAction: (() -> Void)? = nil
     ) -> some View where TC: View {
-        GrowTopAppBar(
+        MyTopAppBar(
             title: title,
             background: background,
             backButtonAction: backButtonAction,

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowBottomTabBar<C>: View where C: View {
+public struct MyBottomTabBar<C>: View where C: View {
     
     @EnvironmentObject private var colorProvider: ColorProvider
     private let selectedTab: BottomTabType
@@ -37,7 +37,7 @@ public struct GrowBottomTabBar<C>: View where C: View {
                         onTap(tab)
                     }
                 } label: {
-                    GrowBottomTabItem(type: tab, isSelected: selectedTab == tab)
+                    MyBottomTabItem(type: tab, isSelected: selectedTab == tab)
                 }
                 .applyAnimation()
             }
@@ -46,7 +46,7 @@ public struct GrowBottomTabBar<C>: View where C: View {
         .padding(.bottom, safeAreaInsets.bottom)
         .padding(.vertical, 8)
         .padding(.horizontal, 8)
-        .growBackground(.background)
+        .myBackground(.background)
         .cornerRadius(16, corners: [.topLeft, .topRight])
         .stroke(16, corners: [.topLeft, .topRight], content: colorProvider.color(.bottomTabSecondary))
         .onChange(of: selectedTab) { _ in

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum GrowImage {
+public enum MyImage {
     case firstMedal
     case secondMedal
     case thirdMedal

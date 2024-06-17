@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct GrowLanguage: View {
+public struct MyLanguage: View {
     
     private let text: String
     
@@ -10,11 +10,11 @@ public struct GrowLanguage: View {
     
     public var body: some View {
         Text(text)
-            .growFont(.labelM)
-            .growColor(.textDarken)
+            .myFont(.labelM)
+            .myColor(.textDarken)
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .growBackground(.background)
+            .myBackground(.background)
             .frame(height: 34)
             .cornerRadius(17, corners: .allCorners)
     }

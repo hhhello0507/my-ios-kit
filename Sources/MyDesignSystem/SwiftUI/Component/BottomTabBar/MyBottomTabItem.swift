@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GrowBottomTabItem: View {
+struct MyBottomTabItem: View {
     
     let type: BottomTabType
     let isSelected: Bool
@@ -14,17 +14,17 @@ struct GrowBottomTabItem: View {
     }
     
     var body: some View {
-        let color: GrowColorScheme = isSelected ? .bottomTabPrimary : .bottomTabPrimaryDisabled
+        let color: MyColorScheme = isSelected ? .bottomTabPrimary : .bottomTabPrimaryDisabled
         HStack {
             Spacer()
             VStack(spacing: 0) {
                 Image(type.image)
                     .resizable()
-                    .growIconColor(color)
+                    .myIconColor(color)
                     .frame(width: 28, height: 28)
                 Text(type.label)
                     .font(.wanted(.Regular, size: 10))
-                    .growColor(color)
+                    .myColor(color)
             }
             .padding(.vertical, 4)
             Spacer()
