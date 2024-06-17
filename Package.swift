@@ -25,7 +25,8 @@ let package = Package(
                 .product(name: "NukeUI", package: "Nuke")
             ],
             resources: [
-                .process("Foundation/Typography/Font")
+                .process("Foundation/Typography/Font"),
+                .process("Resource")
             ]
         )
     ]

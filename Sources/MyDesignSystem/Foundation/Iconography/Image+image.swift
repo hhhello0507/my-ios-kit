@@ -2,6 +2,6 @@ import SwiftUI
 
 public extension Image {
     init(image: GrowImage) {
-        self = Image(image.image, bundle: .module)
+        self = Image(image.image)
     }
 }
