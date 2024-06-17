@@ -26,7 +26,7 @@ let package = Package(
             ],
             resources: [
                 .process("Foundation/Typography/Font"),
-                .process("Resource")
+                .process("Foundation/Iconography/Assets.xcassets")
             ]
         )
     ]
