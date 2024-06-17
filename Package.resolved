@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "my-ios-util",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bestswlkh0310/my-ios-util.git",
-      "state" : {
-        "revision" : "de5aac3b78b4b6dc1a1088f5cceff41cbbcd4e0a",
-        "version" : "1.0.1"
-      }
-    },
-    {
       "identity" : "nuke",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke.git",

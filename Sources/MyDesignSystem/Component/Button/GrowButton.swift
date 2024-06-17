@@ -112,9 +112,7 @@ struct GrowButtonStyle: ButtonStyle {
 
 #Preview {
     VStack {
-        GrowButton("시작하기", type: .CTA) {
-            
-        }
+        GrowButton("시작하기", type: .CTA) {}
         Text("Hello")
     }
     .registerWanted()

@@ -14,8 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/tevelee/SwiftUI-Flow.git", exact: "1.1.0"),
-        .package(url: "https://github.com/kean/Nuke.git", exact: "12.3.0"),
-        .package(url: "https://github.com/bestswlkh0310/my-ios-util.git", exact: "1.0.1"),
+        .package(url: "https://github.com/kean/Nuke.git", exact: "12.3.0")
     ],
     targets: [
         .target(
@@ -23,12 +22,10 @@ let package = Package(
             dependencies: [
                 .product(name: "Flow", package: "SwiftUI-Flow"),
                 .product(name: "Nuke", package: "Nuke"),
-                .product(name: "NukeUI", package: "Nuke"),
-                .product(name: "MyUtil", package: "my-ios-util")
+                .product(name: "NukeUI", package: "Nuke")
             ],
             resources: [
-                .process("Foundation/Typography/Font"),
-                .process("Resources")
+                .process("Foundation/Typography/Font")
             ]
         )
     ]
