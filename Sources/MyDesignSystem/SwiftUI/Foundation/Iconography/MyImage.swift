@@ -7,9 +7,9 @@ public enum MyImage {
     
     var image: String {
         switch self {
-        case .firstMedal: "firstMedal"
-        case .secondMedal: "secondMedal"
-        case .thirdMedal: "thirdMedal"
+        case .firstMedal: "FirstMedal"
+        case .secondMedal: "SecondMedal"
+        case .thirdMedal: "ThirdMedal"
         }
     }
 }

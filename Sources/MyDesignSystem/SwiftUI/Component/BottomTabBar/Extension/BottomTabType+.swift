@@ -2,13 +2,13 @@ import SwiftUI
 
 public extension BottomTabType {
     
-    var image: String {
+    var image: MyIconography {
         switch self {
-        case .Home: "home"
-        case .Forum: "chat"
-        case .GithubRank: "github"
-        case .BaekjoonRank: "baekjoon"
-        case .Profile: "person"
+        case .Home: .home
+        case .Forum: .chat
+        case .GithubRank: .github
+        case .BaekjoonRank: .baekjoon
+        case .Profile: .person
         }
     }
     

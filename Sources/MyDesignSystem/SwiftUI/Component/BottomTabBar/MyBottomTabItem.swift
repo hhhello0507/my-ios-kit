@@ -18,7 +18,7 @@ struct MyBottomTabItem: View {
         HStack {
             Spacer()
             VStack(spacing: 0) {
-                Image(type.image)
+                Image(icon: type.image)
                     .resizable()
                     .myIconColor(color)
                     .frame(width: 28, height: 28)
