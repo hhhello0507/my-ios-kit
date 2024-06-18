@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 public struct Wanted {
     
@@ -10,6 +11,18 @@ public struct Wanted {
         case Medium
         case Regular
         case SemiBold
+        
+        var weight: UIFont.Weight {
+            switch self {
+            case .Black: .black
+            case .Bold: .bold
+            case .ExtraBlack: .black
+            case .ExtraBold: .heavy
+            case .Medium: .medium
+            case .Regular: .regular
+            case .SemiBold: .semibold
+            }
+        }
     }
     
     public static func register() {

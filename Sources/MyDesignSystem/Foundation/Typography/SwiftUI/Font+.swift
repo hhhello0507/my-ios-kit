@@ -1,11 +1,3 @@
-//
-//  Font+.swift
-//  DesignSystem
-//
-//  Created by dgsw8th71 on 4/7/24.
-//  Copyright © 2024 molohala. All rights reserved.
-//
-
 import SwiftUI
 
 public extension Font {
@@ -14,36 +6,9 @@ public extension Font {
     }
 }
 
-public enum MyFont: CaseIterable {
-    case title1B
-    case title1M
-    case title1R
+public extension MyFont {
     
-    case title2B
-    case title2M
-    case title2R
-    
-    case headline1B
-    case headline1M
-    case headline1R
-    
-    case headline2B
-    case headline2M
-    case headline2R
-    
-    case bodyB
-    case bodyM
-    case bodyR
-    
-    case labelB
-    case labelM
-    case labelR
-    
-    case captionB
-    case captionM
-    case captionR
-    
-    public var font: Font {
+    var font: Font {
         switch self {
         case .title1B: .wanted(.Bold, size: 28)
         case .title1M: .wanted(.Medium, size: 28)
@@ -68,20 +33,4 @@ public enum MyFont: CaseIterable {
         case .captionR: .wanted(.Regular, size: 12)
         }
     }
-}
-
-public extension View {
-    func myFont(_ myFont: MyFont) -> some View {
-        self.font(myFont.font)
-    }
-}
-
-#Preview {
-    VStack {
-        ForEach(MyFont.allCases, id: \.self) {
-            Text("Hello World")
-                .myFont($0)
-        }
-    }
-    .registerWanted()
 }
