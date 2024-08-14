@@ -1,4 +1,3 @@
-#if canImport(UIKit)
 import SwiftUI
 
 @available(iOS 13.0, macOS 12.0, *)
@@ -27,7 +26,10 @@ public struct MyBottomTabBar<C>: View where C: View {
                 .ignoresSafeArea()
         }
     }
+    
+    #if canImport(UIKit)
     @Environment(\.safeAreaInsets) private var safeAreaInsets
+    #endif
     
     @ViewBuilder
     private var bottomBarBar: some View {
@@ -45,16 +47,17 @@ public struct MyBottomTabBar<C>: View where C: View {
             }
             Spacer()
         }
+        #if canImport(UIKit)
         .padding(.bottom, safeAreaInsets.bottom)
+        .onChange(of: selectedTab) { _ in
+            let impactMed = UIImpactFeedbackGenerator(style: .rigid)
+            impactMed.impactOccurred()
+        }
+        #endif
         .padding(.vertical, 8)
         .padding(.horizontal, 8)
         .myBackground(.background)
         .cornerRadius(16, corners: [.topLeft, .topRight])
         .stroke(16, corners: [.topLeft, .topRight], content: colorProvider.color(.bottomTabSecondary))
-        .onChange(of: selectedTab) { _ in
-            let impactMed = UIImpactFeedbackGenerator(style: .rigid)
-            impactMed.impactOccurred()
-        }
     }
 }
-#endif
