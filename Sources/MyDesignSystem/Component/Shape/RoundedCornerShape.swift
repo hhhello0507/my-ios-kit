@@ -1,11 +1,24 @@
 import SwiftUI
 
-public struct RoundedCornerShape: Shape {
+public struct RoundedCornerShape : Shape {
     
-    var radius: CGFloat
-    var corners: UIRectCorner
+    public struct RectCorner : OptionSet, @unchecked Sendable {
+        public var rawValue: UInt
+        
+        public init(rawValue: UInt) {
+            self.rawValue = rawValue
+        }
+        public static var topLeft = RectCorner(rawValue: 1 << 0)
+        public static var topRight = RectCorner(rawValue: 1 << 1)
+        public static var bottomLeft = RectCorner(rawValue: 1 << 2)
+        public static var bottomRight = RectCorner(rawValue: 1 << 3)
+        public static var allCorners: RectCorner = [.topLeft, .topRight, .bottomLeft, .bottomRight]
+    }
     
-    public init(radius: CGFloat = .zero, corners: UIRectCorner = .allCorners) {
+    private let radius: CGFloat
+    private let corners: RectCorner
+    
+    public init(radius: CGFloat = .zero, corners: RectCorner = .allCorners) {
         self.radius = radius
         self.corners = corners
     }

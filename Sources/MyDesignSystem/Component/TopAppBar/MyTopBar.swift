@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(macOS 13.0, *)
 public struct MyTopAppBar<C>: View where C: View {
     
     @Environment(\.dismiss) private var dismiss
@@ -68,6 +69,7 @@ public struct MyTopAppBar<C>: View where C: View {
     }
 }
 
+@available(macOS 13.0, *)
 public extension View {
     func myTopBar<TC>(
         _ title: String,

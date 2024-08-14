@@ -91,7 +91,9 @@ struct MyTextFieldStyle: TextFieldStyle {
         let iconColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
         let radius: CGFloat = isRounded ? 26 : 12
         return configuration
+        #if canImport(UIKit)
             .textInputAutocapitalization(.never)
+        #endif
             .autocorrectionDisabled()
             .textContentType(.init(rawValue: ""))
             .focused($isFocused)

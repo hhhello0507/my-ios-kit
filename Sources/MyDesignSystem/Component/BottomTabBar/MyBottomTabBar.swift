@@ -1,5 +1,7 @@
+#if canImport(UIKit)
 import SwiftUI
 
+@available(iOS 13.0, macOS 12.0, *)
 public struct MyBottomTabBar<C>: View where C: View {
     
     @EnvironmentObject private var colorProvider: ColorProvider
@@ -55,3 +57,4 @@ public struct MyBottomTabBar<C>: View where C: View {
         }
     }
 }
+#endif

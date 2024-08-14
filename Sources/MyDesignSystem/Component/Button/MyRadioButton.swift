@@ -30,8 +30,10 @@ public struct MyRadioButton: View {
         
         Button {
             action()
+            #if canImport(UIKit)
             let impactMed = UIImpactFeedbackGenerator(style: .rigid)
             impactMed.impactOccurred()
+            #endif
         } label: {
             HStack(spacing: 6) {
                 Image(icon: isSelected ? selectedIcon : unselectedIcon)

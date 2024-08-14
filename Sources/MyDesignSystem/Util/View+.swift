@@ -23,6 +23,7 @@ public extension View {
     }
 }
 
+#if canImport(UIKit)
 public extension View {
     func hideKeyboardWhenTap() -> some View {
         onAppear(perform: UIApplication.shared.hideKeyboard)
@@ -48,3 +49,4 @@ extension UIApplication: UIGestureRecognizerDelegate {
         return false
     }
 }
+#endif

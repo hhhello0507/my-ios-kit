@@ -1,7 +1,7 @@
-import UIKit
 import SwiftUI
+#if canImport(UIKit) && DEBUG
+import UIKit
 
-#if DEBUG
 extension UIViewController {
     private struct Preview: UIViewControllerRepresentable {
         let viewController: UIViewController
@@ -18,7 +18,6 @@ extension UIViewController {
         Preview(viewController: self)
     }
 }
-
 extension UIView {
     private struct Preview: UIViewRepresentable {
         
@@ -35,5 +34,4 @@ extension UIView {
         Preview(view: self)
     }
 }
-
 #endif

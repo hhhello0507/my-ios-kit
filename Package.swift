@@ -5,11 +5,15 @@ import PackageDescription
 
 let package = Package(
     name: "MyDesignSystem",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
         .library(
             name: "MyDesignSystem",
             targets: ["MyDesignSystem"]
+        ),
+        .executable(
+            name: "MyDesignSystemClient", 
+            targets: ["MyDesignSystemClient"]
         )
     ],
     dependencies: [
@@ -27,6 +31,12 @@ let package = Package(
             resources: [
                 .process("Resource/Font"),
                 .process("Resource/Assets.xcassets")
+            ]
+        ),
+        .executableTarget(
+            name: "MyDesignSystemClient",
+            dependencies: [
+                .target(name: "MyDesignSystem")
             ]
         )
     ]

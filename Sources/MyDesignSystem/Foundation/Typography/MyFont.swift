@@ -1,5 +1,5 @@
 import SwiftUI
-import UIKit
+//import UIKit
 
 public enum MyFont: CaseIterable {
     case title1B
@@ -41,6 +41,7 @@ public enum MyFont: CaseIterable {
     .registerWanted()
 }
 
+#if canImport(UIKit)
 func makeUIView() -> UIView {
     let stackView = UIStackView()
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,3 +62,4 @@ func makeUIView() -> UIView {
     }
     .registerWanted()
 }
+#endif

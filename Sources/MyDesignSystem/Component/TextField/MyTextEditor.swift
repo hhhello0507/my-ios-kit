@@ -31,10 +31,12 @@ public struct MyTextEditor: View {
             text: $text
         )
         .disabled(!isEnabled)
+        #if canImport(UIKit)
         .textInputAutocapitalization(.never)
+        .textEditorBackground(.clear)
+        #endif
         .autocorrectionDisabled()
         .textContentType(.init(rawValue: ""))
-        .textEditorBackground(.clear)
         .focused($isFocused)
         .myFont(.bodyM)
         .cornerRadius(radius, corners: .allCorners)
