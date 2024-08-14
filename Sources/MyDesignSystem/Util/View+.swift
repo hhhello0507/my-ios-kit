@@ -23,13 +23,18 @@ public extension View {
     }
 }
 
-#if canImport(UIKit)
 public extension View {
     func hideKeyboardWhenTap() -> some View {
+        
+#if canImport(UIKit)
         onAppear(perform: UIApplication.shared.hideKeyboard)
+#else
+        self
+#endif
     }
 }
 
+#if canImport(UIKit)
 public extension UIApplication {
     func hideKeyboard() {
         guard let scene = connectedScenes.first as? UIWindowScene,
