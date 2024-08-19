@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MyBottomTabItem<Item>: View where Item: BottomAppBarItem {
+struct MyBottomAppBarItem<Item>: View where Item: BottomAppBarItem {
     
     private let type: Item
     private let isSelected: Bool

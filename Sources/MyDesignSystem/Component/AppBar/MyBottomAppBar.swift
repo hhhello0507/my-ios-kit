@@ -51,7 +51,7 @@ public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarIte
                         onTap(tab)
                     }
                 } label: {
-                    MyBottomTabItem(type: tab, isSelected: selection == tab)
+                    MyBottomAppBarItem(type: tab, isSelected: selection == tab)
                         .frame(maxWidth: .infinity)
                         .background(Sementic.Background.neutral)
                 }

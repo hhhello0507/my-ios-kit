@@ -79,11 +79,12 @@ public enum Sementic {
         }
     }
     public enum Static: Colorable, CaseIterable {
-        case white, black
+        case white, black, clear
         public var box: ColorBox {
             switch self {
             case .white: ColorBox(Palette.common00, Palette.common00)
             case .black: ColorBox(Palette.common100, Palette.common100)
+            case .clear: ColorBox(.clear, .clear)
             }
         }
     }
