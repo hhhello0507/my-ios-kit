@@ -20,9 +20,11 @@ public struct MyBottomTabBar<C>: View where C: View {
     public var body: some View {
         ZStack {
             content()
-            bottomBarBar
-                .toBottom()
-                .ignoresSafeArea()
+            VStack(spacing: 0) {
+                Spacer()
+                bottomBarBar
+            }
+            .ignoresSafeArea()
         }
     }
     

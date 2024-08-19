@@ -124,7 +124,7 @@ struct MyTextFieldStyle: TextFieldStyle {
                             }
                         }
                     }
-                    .frame(size: 28)
+                    .frame(width: 28, height: 28)
                 }
                 .padding(.trailing, 8)
             )

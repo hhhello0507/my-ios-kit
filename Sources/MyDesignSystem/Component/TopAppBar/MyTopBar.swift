@@ -46,7 +46,7 @@ public struct MyTopAppBar<C>: View where C: View {
                             Image(icon: .expandLeft)
                                 .resizable()
 //                                .myIconColor(.textNormal)
-                                .frame(size: 28)
+                                .frame(width: 28, height: 28)
                                 .padding(2)
                         }
                     }
@@ -61,8 +61,8 @@ public struct MyTopAppBar<C>: View where C: View {
 //                .myBackground(background)
                 .padding(.horizontal, 4)
                 content()
+                Spacer()
             }
-            .toTop()
             .navigationBarBackButtonHidden()
         }
     }

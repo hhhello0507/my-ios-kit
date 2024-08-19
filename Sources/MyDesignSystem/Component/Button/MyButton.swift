@@ -47,7 +47,7 @@ public struct MyButton: View {
                     Image(icon: leadingIcon)
                         .resizable()
 //                        .myIconColor(color)
-                        .frame(size: 20)
+                        .frame(width: 20, height: 20)
                 }
                 Text(text)
 //                    .myColor(color)
@@ -63,7 +63,7 @@ public struct MyButton: View {
                     Image(icon: trailingIcon)
                         .resizable()
 //                        .myIconColor(color)
-                        .frame(size: 20)
+                        .frame(width: 20, height: 20)
                 }
             }
             .padding(.horizontal, type.horizontalPadding)
