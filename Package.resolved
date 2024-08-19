@@ -8,15 +8,6 @@
         "revision" : "15fde63470d782c897816a74bdd516a907e33147",
         "version" : "12.3.0"
       }
-    },
-    {
-      "identity" : "swiftui-flow",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tevelee/SwiftUI-Flow.git",
-      "state" : {
-        "revision" : "76c03c9fa9fa0e5470cb6d8f2da17466b2efd63d",
-        "version" : "1.1.0"
-      }
     }
   ],
   "version" : 2

@@ -15,20 +15,17 @@ public enum DividerType {
 public struct MyDivider: View {
     
     private let type: DividerType
-    private let color: MyColorScheme
     
     public init(
-        type: DividerType = .thin,
-        color: MyColorScheme = .dividerNormal
+        type: DividerType = .thin
     ) {
         self.type = type
-        self.color = color
     }
     
     public var body: some View {
         Rectangle()
             .frame(maxWidth: .infinity)
             .frame(height: type.height)
-            .myColor(color)
+//            .myColor(color)
     }
 }

@@ -12,17 +12,16 @@ import SwiftUI
 public struct MyTopAppBar<C>: View where C: View {
     
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var colorProvider: ColorProvider
     
     private let title: String
-    private let background: MyColorScheme
+    private let background: Colorable
     private let content: () -> C
     private let backButtonAction: (() -> Void)?
     private let trailingContent: AnyView
     
     public init(
         title: String,
-        background: MyColorScheme,
+        background: Colorable,
         backButtonAction: (() -> Void)?,
         trailingContent: AnyView = AnyView(EmptyView()),
         @ViewBuilder content: @escaping () -> C
@@ -36,7 +35,7 @@ public struct MyTopAppBar<C>: View where C: View {
     
     public var body: some View {
         ZStack {
-            colorProvider.color(background)
+            background.box.color
                 .ignoresSafeArea()
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
@@ -46,20 +45,20 @@ public struct MyTopAppBar<C>: View where C: View {
                         } label: {
                             Image(icon: .expandLeft)
                                 .resizable()
-                                .myIconColor(.textNormal)
+//                                .myIconColor(.textNormal)
                                 .frame(size: 28)
                                 .padding(2)
                         }
                     }
                     Text(title)
                         .myFont(backButtonAction == nil ? .title2B : .headline2M)
-                        .myColor(.textNormal)
+//                        .myColor(.textNormal)
                         .padding(.leading, 8)
                     Spacer()
                     trailingContent
                 }
                 .frame(height: 54)
-                .myBackground(background)
+//                .myBackground(background)
                 .padding(.horizontal, 4)
                 content()
             }
@@ -73,7 +72,7 @@ public struct MyTopAppBar<C>: View where C: View {
 public extension View {
     func myTopBar<TC>(
         _ title: String,
-        background: MyColorScheme = .background,
+        background: Colorable = Sementic.Background.neutral,
         @ViewBuilder trailingContent: @escaping () -> TC = { EmptyView() },
         backButtonAction: (() -> Void)? = nil
     ) -> some View where TC: View {

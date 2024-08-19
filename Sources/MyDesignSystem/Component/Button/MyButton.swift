@@ -4,7 +4,6 @@ public struct MyButton: View {
     
     // MARK: - State
     @State private var isLoading = false
-    @EnvironmentObject private var colorProvider: ColorProvider
     
     // MARK: - Parameters
     private let text: String
@@ -34,7 +33,6 @@ public struct MyButton: View {
     }
     
     public var body: some View {
-        let color: MyColorScheme = isEnabled ? .buttonText : .buttonTextDisabled
         
         Button {
             guard isEnabled, !isLoading else { return }
@@ -48,23 +46,23 @@ public struct MyButton: View {
                 if let leadingIcon {
                     Image(icon: leadingIcon)
                         .resizable()
-                        .myIconColor(color)
+//                        .myIconColor(color)
                         .frame(size: 20)
                 }
                 Text(text)
-                    .myColor(color)
+//                    .myColor(color)
                     .myFont(type.font)
                     .opacity(isLoading ? 0 : 1)
                     .overlay {
                         if isLoading {
                             ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: colorProvider.color(color)))
+//                                .progressViewStyle(CircularProgressViewStyle(tint: colorProvider.color(color)))
                         }
                     }
                 if let trailingIcon {
                     Image(icon: trailingIcon)
                         .resizable()
-                        .myIconColor(color)
+//                        .myIconColor(color)
                         .frame(size: 20)
                 }
             }
@@ -95,18 +93,18 @@ struct MyButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         
-        let background: MyColorScheme = isEnabled ? .buttonPrimary : .buttonPrimaryDisabled
+//        let background: Sementic = isEnabled ? .buttonPrimary : .buttonPrimaryDisabled
         
         configuration.label
             .frame(height: type.height)
-            .if(type == .CTA) {
-                $0.frame(maxWidth: .infinity)
-            }
-            .myBackground(background)
+//            .if(type == .CTA) {
+//                $0.frame(maxWidth: .infinity)
+//            }
+//            .myBackground(background)
             .cornerRadius(isRounded ? type.height / 2 : type.cornerRadius, corners: .allCorners)
-            .if(isEnabled) {
-                $0.addPressAnimation(configuration.isPressed)
-            }
+//            .if(isEnabled) {
+//                $0.addPressAnimation(configuration.isPressed)
+//            }
     }
 }
 
@@ -116,5 +114,4 @@ struct MyButtonStyle: ButtonStyle {
         Text("Hello")
     }
     .registerWanted()
-    .environmentObject(ColorProvider(isDarkTheme: false))
 }

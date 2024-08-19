@@ -20,7 +20,7 @@ public struct MyToggle: View {
     
     public var body: some View {
         Toggle("", isOn: $isOn)
-            .myTint(isOn ? .buttonPrimary : .buttonTextDisabled)
+//            .myTint(isOn ? .buttonPrimary : .buttonTextDisabled)
             .fixedSize()
     }
 }

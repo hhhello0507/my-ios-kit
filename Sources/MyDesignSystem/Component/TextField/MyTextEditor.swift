@@ -3,7 +3,6 @@ import SwiftUI
 public struct MyTextEditor: View {
     
     // MARK: - State
-    @EnvironmentObject private var colorProvider: ColorProvider
     @Binding var text: String
     @FocusState private var isFocused: Bool
     
@@ -23,9 +22,9 @@ public struct MyTextEditor: View {
     
     // MARK: - View
     public var body: some View {
-        let strokeColor: MyColorScheme = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
-        let textColor: MyColorScheme = !isEnabled ? text.isEmpty ? .textAlt : .textFieldTextDisabled : .textNormal
-        let iconColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
+//        let strokeColor: Sementic = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
+//        let textColor: Sementic = !isEnabled ? text.isEmpty ? .textAlt : .textFieldTextDisabled : .textNormal
+//        let iconColor: Sementic = !isEnabled ? .textFieldTextDisabled : .textAlt
         let radius: CGFloat = isRounded ? 26 : 12
         TextEditor(
             text: $text
@@ -42,9 +41,9 @@ public struct MyTextEditor: View {
         .cornerRadius(radius, corners: .allCorners)
         .padding(.vertical, 8)
         .padding(.horizontal, 12) // for inner padding
-        .accentColor(colorProvider.color(.textFieldPrimary)) // for indicator color
-        .myColor(textColor) // for text color
-        .stroke(radius, content: colorProvider.color(strokeColor), lineWidth: 1.5) // for stroke color
+//        .accentColor(colorProvider.color(.textFieldPrimary)) // for indicator color
+//        .myColor(textColor) // for text color
+//        .stroke(radius, content: colorProvider.color(strokeColor), lineWidth: 1.5) // for stroke color
         .onTapGesture {
             isFocused = true
         }

@@ -3,7 +3,6 @@ import SwiftUI
 public struct MyTextField: View {
     
     // MARK: - State
-    @EnvironmentObject private var colorProvider: ColorProvider
     @Binding var text: String
     @State private var isHide = true
     
@@ -34,15 +33,15 @@ public struct MyTextField: View {
                 SecureField(
                     hint,
                     text: $text,
-                    prompt: Text(hint).foregroundColor(colorProvider.color(.textAlt))
+                    prompt: Text(hint)/*.foregroundColor(colorProvider.color(.textAlt))*/
                 )
             } else {
                 TextField(
                     hint,
                     text: $text,
-                    prompt: Text(hint).foregroundColor(colorProvider.color(.textAlt))
+                    prompt: Text(hint)/*.foregroundColor(colorProvider.color(.textAlt))*/
                 )
-                .myColor(text.isEmpty ? .textAlt : .textNormal)
+//                .myColor(text.isEmpty ? .textAlt : .textNormal)
             }
         }
         .textFieldStyle(
@@ -61,7 +60,6 @@ public struct MyTextField: View {
 struct MyTextFieldStyle: TextFieldStyle {
     
     // MARK: - State
-    @EnvironmentObject private var colorProvider: ColorProvider
     @FocusState private var isFocused: Bool
     @Binding private var text: String
     @Binding private var isHide: Bool
@@ -86,9 +84,9 @@ struct MyTextFieldStyle: TextFieldStyle {
     }
     
     func _body(configuration: TextField<Self._Label>) -> some View {
-        let strokeColor: MyColorScheme = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
-        let textColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textNormal
-        let iconColor: MyColorScheme = !isEnabled ? .textFieldTextDisabled : .textAlt
+//        let strokeColor: Sementic = !isEnabled ? .textFieldSecondaryDisabled : isFocused ? .textFieldPrimary : .textFieldSecondary
+//        let textColor: Sementic = !isEnabled ? .textFieldTextDisabled : .textNormal
+//        let iconColor: Sementic = !isEnabled ? .textFieldTextDisabled : .textAlt
         let radius: CGFloat = isRounded ? 26 : 12
         return configuration
         #if canImport(UIKit)
@@ -101,9 +99,9 @@ struct MyTextFieldStyle: TextFieldStyle {
             .frame(height: 52)
             .cornerRadius(radius, corners: .allCorners)
             .padding(.horizontal, 12) // for inner padding
-            .accentColor(colorProvider.color(.textFieldPrimary)) // for indicator color
-            .myColor(textColor) // for text color
-            .stroke(radius, content: colorProvider.color(strokeColor), lineWidth: 1.5) // for stroke color
+//            .accentColor(colorProvider.color(.textFieldPrimary)) // for indicator color
+//            .myColor(textColor) // for text color
+//            .stroke(radius, content: colorProvider.color(strokeColor), lineWidth: 1.5) // for stroke color
             .overlay(
                 HStack(spacing: 0) {
                     Spacer()
@@ -112,14 +110,14 @@ struct MyTextFieldStyle: TextFieldStyle {
                             if isSecured {
                                 Image(icon: isHide ? .hide : .show)
                                     .resizable()
-                                    .myIconColor(iconColor)
+//                                    .myIconColor(iconColor)
                                     .onTapGesture {
                                         isHide.toggle()
                                     }
                             } else if !text.isEmpty {
                                 Image(icon: .closeFill)
                                     .resizable()
-                                    .myIconColor(iconColor)
+//                                    .myIconColor(iconColor)
                                     .onTapGesture {
                                         text = ""
                                     }

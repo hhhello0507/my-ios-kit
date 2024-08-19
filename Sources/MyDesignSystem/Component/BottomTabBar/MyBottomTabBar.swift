@@ -3,7 +3,6 @@ import SwiftUI
 @available(iOS 13.0, macOS 12.0, *)
 public struct MyBottomTabBar<C>: View where C: View {
     
-    @EnvironmentObject private var colorProvider: ColorProvider
     private let selectedTab: BottomTabType
     private let onTap: (BottomTabType) -> Void
     private let content: () -> C
@@ -56,8 +55,8 @@ public struct MyBottomTabBar<C>: View where C: View {
         #endif
         .padding(.vertical, 8)
         .padding(.horizontal, 8)
-        .myBackground(.background)
+//        .myBackground(.background)
         .cornerRadius(16, corners: [.topLeft, .topRight])
-        .stroke(16, corners: [.topLeft, .topRight], content: colorProvider.color(.bottomTabSecondary))
+//        .stroke(16, corners: [.topLeft, .topRight], content: colorProvider.color(.bottomTabSecondary))
     }
 }

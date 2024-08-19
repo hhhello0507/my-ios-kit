@@ -42,7 +42,7 @@ public struct MyAvatar: View {
                } else if state.error != nil {
                    label
                } else {
-                   MyAvatarShimmer(type: type)
+//                   MyAvatarShimmer(type: type)
                }
             }
             .processors([.resize(size: .init(width: type.size, height: type.size), unit: .pixels)])
@@ -55,12 +55,12 @@ public struct MyAvatar: View {
     @ViewBuilder
     private var label: some View {
         Circle()
-            .myColor(.avatarBackground)
+//            .myColor(.avatarBackground)
             .frame(width: type.size, height: type.size)
             .overlay {
                 Image(icon: .person)
                     .resizable()
-                    .myIconColor(.avatarLabel)
+//                    .myIconColor(.avatarLabel)
                     .frame(width: type.size / 2, height: type.size / 2)
             }
     }
@@ -69,5 +69,4 @@ public struct MyAvatar: View {
 #Preview {
     MyAvatar(type: .extraLarge)
         .registerWanted()
-        .environmentObject(ColorProvider(isDarkTheme: false))
 }

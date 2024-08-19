@@ -17,14 +17,12 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/tevelee/SwiftUI-Flow.git", exact: "1.1.0"),
         .package(url: "https://github.com/kean/Nuke.git", exact: "12.3.0")
     ],
     targets: [
         .target(
             name: "MyDesignSystem",
             dependencies: [
-                .product(name: "Flow", package: "SwiftUI-Flow"),
                 .product(name: "Nuke", package: "Nuke"),
                 .product(name: "NukeUI", package: "Nuke")
             ],

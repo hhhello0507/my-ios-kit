@@ -40,26 +40,3 @@ public enum MyFont: CaseIterable {
     }
     .registerWanted()
 }
-
-#if canImport(UIKit)
-func makeUIView() -> UIView {
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.alignment = .center
-    MyFont.allCases.forEach {
-        let label = UILabel()
-        label.font = $0.uiFont
-        label.text = "테스트"
-        stackView.addArrangedSubview(label)
-    }
-    return stackView
-}
-
-#Preview("MyFont+UIKit") {
-    VStack {
-        makeUIView().toPreview()
-    }
-    .registerWanted()
-}
-#endif

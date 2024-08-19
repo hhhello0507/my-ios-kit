@@ -14,17 +14,17 @@ struct MyBottomTabItem: View {
     }
     
     var body: some View {
-        let color: MyColorScheme = isSelected ? .bottomTabPrimary : .bottomTabPrimaryDisabled
+//        let color: Sementic = isSelected ? .bottomTabPrimary : .bottomTabPrimaryDisabled
         HStack {
             Spacer()
             VStack(spacing: 0) {
                 Image(icon: type.image)
                     .resizable()
-                    .myIconColor(color)
+//                    .myIconColor(color)
                     .frame(width: 28, height: 28)
                 Text(type.label)
                     .font(.wanted(.Regular, size: 10))
-                    .myColor(color)
+//                    .myColor(color)
             }
             .padding(.vertical, 4)
             Spacer()
