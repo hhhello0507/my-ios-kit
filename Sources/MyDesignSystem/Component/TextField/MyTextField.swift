@@ -108,19 +108,19 @@ struct MyTextFieldStyle: TextFieldStyle {
                     Group {
                         if isEnabled {
                             if isSecured {
-                                Image(icon: isHide ? .hide : .show)
-                                    .resizable()
+//                                Image(icon: isHide ? Icons.Visible.Hide : Icons.Visible.Show)
+//                                    .resizable()
 //                                    .myIconColor(iconColor)
-                                    .onTapGesture {
-                                        isHide.toggle()
-                                    }
+//                                    .onTapGesture {
+//                                        isHide.toggle()
+//                                    }
                             } else if !text.isEmpty {
-                                Image(icon: .closeFill)
-                                    .resizable()
-//                                    .myIconColor(iconColor)
-                                    .onTapGesture {
-                                        text = ""
-                                    }
+//                                Image(icon: .closeFill)
+//                                    .resizable()
+////                                    .myIconColor(iconColor)
+//                                    .onTapGesture {
+//                                        text = ""
+//                                    }
                             }
                         }
                     }

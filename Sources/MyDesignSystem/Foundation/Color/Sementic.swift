@@ -24,7 +24,7 @@ public struct ColorBox {
 }
 
 public enum Sementic {
-    public enum Label: Colorable {
+    public enum Label: Colorable, CaseIterable {
         case normal, strong, neutral, alternative, assistive, disable
         public var box: ColorBox {
             switch self {
@@ -37,7 +37,7 @@ public enum Sementic {
             }
         }
     }
-    public enum Line: Colorable {
+    public enum Line: Colorable, CaseIterable {
         case normal, neutral, alternative
         public var box: ColorBox {
             switch self {
@@ -47,7 +47,7 @@ public enum Sementic {
             }
         }
     }
-    public enum Fill: Colorable {
+    public enum Fill: Colorable, CaseIterable {
         case normal, neutral, alternative, assistive
         public var box: ColorBox {
             switch self {
@@ -58,7 +58,7 @@ public enum Sementic {
             }
         }
     }
-    public enum Background: Colorable {
+    public enum Background: Colorable, CaseIterable {
         case normal, neutral, alternative
         public var box: ColorBox {
             switch self {
@@ -68,7 +68,7 @@ public enum Sementic {
             }
         }
     }
-    public enum Elevation: Colorable {
+    public enum Elevation: Colorable, CaseIterable {
         case black1, black2, black3
         public var box: ColorBox {
             switch self {
@@ -78,7 +78,7 @@ public enum Sementic {
             }
         }
     }
-    public enum Static: Colorable {
+    public enum Static: Colorable, CaseIterable {
         case white, black
         public var box: ColorBox {
             switch self {
@@ -87,7 +87,7 @@ public enum Sementic {
             }
         }
     }
-    public enum Primary: Colorable {
+    public enum Primary: Colorable, CaseIterable {
         case normal, alternative, assistive
         public var box: ColorBox {
             switch self {
@@ -97,4 +97,43 @@ public enum Sementic {
             }
         }
     }
+}
+
+private struct SementicPreview: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                ForEach(Sementic.Label.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+                ForEach(Sementic.Line.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+                ForEach(Sementic.Fill.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+                ForEach(Sementic.Background.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+                ForEach(Sementic.Elevation.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+                ForEach(Sementic.Static.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+                ForEach(Sementic.Primary.allCases, id: \.self) {
+                    $0.box.color.frame(height: 30)
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    SementicPreview()
+}
+
+#Preview {
+    SementicPreview()
+        .preferredColorScheme(.dark)
 }

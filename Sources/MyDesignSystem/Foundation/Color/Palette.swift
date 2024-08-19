@@ -121,12 +121,16 @@ public enum CustomPalette {
         Palette.neutral15,
         Palette.neutral10,
         Palette.neutral7,
-        Palette.neutral5,
+        Palette.neutral5
     ]
     
-    return VStack(spacing: 0) {
-        ForEach(data, id: \.self) {
-            $0
+    return (
+        ScrollView {
+            VStack(spacing: 0) {
+                ForEach(data, id: \.self) {
+                    $0.frame(height: 30)
+                }
+            }
         }
-    }
+    )
 }

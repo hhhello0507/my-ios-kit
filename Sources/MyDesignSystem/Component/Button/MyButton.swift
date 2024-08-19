@@ -8,8 +8,8 @@ public struct MyButton: View {
     // MARK: - Parameters
     private let text: String
     private let type: ButtonType
-    private let leadingIcon: MyIconography?
-    private let trailingIcon: MyIconography?
+    private let leadingIcon: Icons?
+    private let trailingIcon: Icons?
     private let isEnabled: Bool
     private let isRounded: Bool
     private let action: () async -> Void
@@ -17,8 +17,8 @@ public struct MyButton: View {
     public init(
         _ text: String,
         type: ButtonType,
-        leadingIcon: MyIconography? = nil,
-        trailingIcon: MyIconography? = nil,
+        leadingIcon: Icons? = nil,
+        trailingIcon: Icons? = nil,
         isEnabled: Bool = true,
         isRounded: Bool = false,
         action: @escaping () async -> Void
@@ -43,12 +43,12 @@ public struct MyButton: View {
             }
         } label: {
             HStack(spacing: type.labelSpacing) {
-                if let leadingIcon {
-                    Image(icon: leadingIcon)
-                        .resizable()
-//                        .myIconColor(color)
-                        .frame(width: 20, height: 20)
-                }
+//                if let leadingIcon {
+//                    Image(icon: leadingIcon)
+//                        .resizable()
+////                        .myIconColor(color)
+//                        .frame(width: 20, height: 20)
+//                }
                 Text(text)
 //                    .myColor(color)
                     .myFont(type.font)
@@ -59,12 +59,12 @@ public struct MyButton: View {
 //                                .progressViewStyle(CircularProgressViewStyle(tint: colorProvider.color(color)))
                         }
                     }
-                if let trailingIcon {
-                    Image(icon: trailingIcon)
-                        .resizable()
-//                        .myIconColor(color)
-                        .frame(width: 20, height: 20)
-                }
+//                if let trailingIcon {
+//                    Image(icon: trailingIcon)
+//                        .resizable()
+////                        .myIconColor(color)
+//                        .frame(width: 20, height: 20)
+//                }
             }
             .padding(.horizontal, type.horizontalPadding)
         }

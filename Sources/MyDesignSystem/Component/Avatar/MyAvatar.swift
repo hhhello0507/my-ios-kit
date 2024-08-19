@@ -2,21 +2,19 @@ import SwiftUI
 import NukeUI
 
 public enum AvatarType: CaseIterable {
-    case extraSmall
+    case smaller
     case small
     case medium
     case large
-    case extraLarge
-    case xxl
+    case larger
     
     var size: CGFloat {
         switch self {
-        case .extraSmall: 16
-        case .small: 24
+        case .smaller: 20
+        case .small: 28
         case .medium: 32
-        case .large: 36
-        case .extraLarge: 64
-        case .xxl: 128
+        case .large: 42
+        case .larger: 64
         }
     }
 }
@@ -42,7 +40,7 @@ public struct MyAvatar: View {
                } else if state.error != nil {
                    label
                } else {
-//                   MyAvatarShimmer(type: type)
+                   EmptyView() // TODO: Add Shimmer
                }
             }
             .processors([.resize(size: .init(width: type.size, height: type.size), unit: .pixels)])
@@ -55,18 +53,36 @@ public struct MyAvatar: View {
     @ViewBuilder
     private var label: some View {
         Circle()
-//            .myColor(.avatarBackground)
+            .foreground(Sementic.Fill.alternative)
             .frame(width: type.size, height: type.size)
             .overlay {
-                Image(icon: .person)
+                Image(icon: Icons.Feature.Person)
                     .resizable()
-//                    .myIconColor(.avatarLabel)
-                    .frame(width: type.size / 2, height: type.size / 2)
+                    .renderingMode(.template)
+                    .foreground(Sementic.Fill.assistive)
+                    .frame(width: type.size, height: type.size)
+                    .offset(y: type.size / 6.0)
             }
+            .clipShape(Circle())
+    }
+}
+
+private struct AvatarPreview: View {
+    var body: some View {
+        VStack {
+            ForEach(AvatarType.allCases, id: \.self) {
+                MyAvatar(type: $0)
+            }
+        }
+        .registerWanted()
     }
 }
 
 #Preview {
-    MyAvatar(type: .extraLarge)
-        .registerWanted()
+    AvatarPreview()
+}
+
+#Preview {
+    AvatarPreview()
+        .preferredColorScheme(.dark)
 }

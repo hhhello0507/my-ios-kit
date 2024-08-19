@@ -1,13 +1,15 @@
 import SwiftUI
 
 public enum DividerType {
-    case thin
-    case thick
+    case small
+    case medium
+    case large
     
     var height: CGFloat {
         switch self {
-        case .thin: 1
-        case .thick: 8
+        case .small: 1
+        case .medium: 8
+        case .large: 14
         }
     }
 }
@@ -17,7 +19,7 @@ public struct MyDivider: View {
     private let type: DividerType
     
     public init(
-        type: DividerType = .thin
+        type: DividerType = .small
     ) {
         self.type = type
     }
@@ -26,6 +28,14 @@ public struct MyDivider: View {
         Rectangle()
             .frame(maxWidth: .infinity)
             .frame(height: type.height)
-//            .myColor(color)
+            .foreground(Sementic.Line.normal)
+    }
+}
+
+#Preview {
+    VStack {
+        MyDivider()
+        MyDivider(type: .medium)
+        MyDivider(type: .large)
     }
 }

@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct MyBottomTabItem: View {
+struct MyBottomTabItem<Item>: View where Item: BottomAppBarItem {
     
-    let type: BottomTabType
-    let isSelected: Bool
+    private let type: Item
+    private let isSelected: Bool
     
     init(
-        type: BottomTabType,
+        type: Item,
         isSelected: Bool
     ) {
         self.type = type
@@ -14,17 +14,18 @@ struct MyBottomTabItem: View {
     }
     
     var body: some View {
-//        let color: Sementic = isSelected ? .bottomTabPrimary : .bottomTabPrimaryDisabled
+        let color: Colorable = isSelected ? Sementic.Primary.normal : Sementic.Line.normal
         HStack {
             Spacer()
             VStack(spacing: 0) {
-                Image(icon: type.image)
+                Image(icon: type.icon)
                     .resizable()
-//                    .myIconColor(color)
+                    .renderingMode(.template)
+                    .foreground(color)
                     .frame(width: 28, height: 28)
-                Text(type.label)
+                Text(type.text)
                     .font(.wanted(.Regular, size: 10))
-//                    .myColor(color)
+                    .foreground(color)
             }
             .padding(.vertical, 4)
             Spacer()
