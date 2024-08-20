@@ -1,10 +1,3 @@
-//
-//  DodamModalProvider.swift
-//
-//
-//  Created by hhhello0507 on 7/26/24.
-//
-
 import SwiftUI
 
 public struct MyModalProvider<C: View>: View {
