@@ -35,17 +35,17 @@ public struct MySegmentedButton<T: SegmentedButtonProtocol>: View {
                 } label: {
                     Text(item.text)
                         .myFont(.headlineM)
-                        .foreground(Sementic.Label.normal)
+                        .foreground(Colors.Label.normal)
                         .opacity(isSelected ? 1 : 0.5)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background {
                             if isSelected {
                                 RoundedRectangle(cornerRadius: 8)
-                                    .foreground(Sementic.Fill.assistive)
+                                    .foreground(Colors.Fill.assistive)
                                     .matchedGeometryEffect(id: "background", in: animation)
                                     .shadow(.evBlack1)
                             } else {
-                                Sementic.Fill.neutral.box.color
+                                Colors.Fill.neutral.box.color
                             }
                         }
                 }
@@ -56,7 +56,7 @@ public struct MySegmentedButton<T: SegmentedButtonProtocol>: View {
         .padding(4)
         .frame(height: 48)
         .frame(maxWidth: .infinity)
-        .background(Sementic.Fill.neutral)
+        .background(Colors.Fill.neutral)
         .cornerRadius(12)
         .onChange(of: selected) { newValue in
             selection.wrappedValue = newValue

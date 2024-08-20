@@ -47,7 +47,7 @@ public struct MyTimePickerPresenter<C: View>: ModalViewProtocol {
                 VStack(spacing: 16) {
                     Text(timePicker.title)
                         .myFont(.headling2B)
-                        .foreground(Sementic.Label.strong)
+                        .foreground(Colors.Label.strong)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     HStack(spacing: 0) {
                         SnapScrollView(
@@ -69,15 +69,15 @@ public struct MyTimePickerPresenter<C: View>: ModalViewProtocol {
                                 .myFont(.title3M)
                                 .foreground(
                                     selected
-                                    ? Sementic.Label.normal
-                                    : Sementic.Label.alternative
+                                    ? Colors.Label.normal
+                                    : Colors.Label.alternative
                                 )
                                 .opacity(selected ? 1 : 0.5)
                                 .padding(.horizontal, 20)
                         }
                         Text(":")
                             .myFont(.headling1B)
-                            .foreground(Sementic.Label.normal)
+                            .foreground(Colors.Label.normal)
                         SnapScrollView(
                             Array(minutes.enumerated()),
                             selection: .init {
@@ -97,8 +97,8 @@ public struct MyTimePickerPresenter<C: View>: ModalViewProtocol {
                                 .myFont(.title3M)
                                 .foreground(
                                     selected
-                                    ? Sementic.Label.normal
-                                    : Sementic.Label.alternative
+                                    ? Colors.Label.normal
+                                    : Colors.Label.alternative
                                 )
                                 .opacity(selected ? 1 : 0.5)
                                 .padding(.horizontal, 20)
@@ -107,14 +107,14 @@ public struct MyTimePickerPresenter<C: View>: ModalViewProtocol {
                     .frame(maxWidth: .infinity)
                     .background {
                         Rectangle()
-                            .fill(Sementic.Fill.alternative)
+                            .fill(Colors.Fill.alternative)
                             .opacity(0.5)
                             .frame(height: 44)
                             .cornerRadius(10, corners: .allCorners)
                     }
                     HStack {
                         Spacer()
-                        MyButton.text("선택", foreground: Sementic.Primary.normal) {
+                        MyButton.text("선택", foreground: Colors.Primary.normal) {
                             timePicker.action()
                             dismiss()
                         }
@@ -139,9 +139,9 @@ private struct TimePickerPreview: View {
                     })
                 }
                 Text("\(Calendar.current.dateComponents([.hour], from: date).hour!)")
-                    .foreground(Sementic.Label.normal)
+                    .foreground(Colors.Label.normal)
                 Text("\(Calendar.current.dateComponents([.minute], from: date).minute!)")
-                    .foreground(Sementic.Label.normal)
+                    .foreground(Colors.Label.normal)
             }
         }
         .registerWanted()

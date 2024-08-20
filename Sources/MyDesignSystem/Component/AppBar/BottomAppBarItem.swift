@@ -14,7 +14,7 @@ struct MyBottomAppBarItem<Item>: View where Item: BottomAppBarItem {
     }
     
     var body: some View {
-        let color: Colorable = isSelected ? Sementic.Primary.normal : Sementic.Line.normal
+        let color: Colorable = isSelected ? Colors.Primary.normal : Colors.Line.normal
         HStack {
             Spacer()
             VStack(spacing: 0) {

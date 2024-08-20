@@ -15,37 +15,37 @@ public enum ButtonRole: CaseIterable {
     
     var foreground: Colorable {
         switch self {
-        case .primary: Sementic.Static.white
-        case .secondary: Sementic.Primary.normal
-        case .assistive: Sementic.Label.neutral
-        case .text: Sementic.Label.normal
+        case .primary: Colors.Static.white
+        case .secondary: Colors.Primary.normal
+        case .assistive: Colors.Label.neutral
+        case .text: Colors.Label.normal
         }
     }
     
     var background: Colorable {
         switch self {
-        case .primary: Sementic.Primary.normal
-        case .secondary: Sementic.Primary.assistive
-        case .assistive: Sementic.Fill.neutral
-        case .text: Sementic.Static.clear
+        case .primary: Colors.Primary.normal
+        case .secondary: Colors.Primary.assistive
+        case .assistive: Colors.Fill.neutral
+        case .text: Colors.Static.clear
         }
     }
     
     var strokeForeground: Colorable {
         switch self {
-        case .primary: Sementic.Primary.normal
-        case .secondary: Sementic.Primary.normal
-        case .assistive: Sementic.Label.neutral
-        case .text: Sementic.Static.clear
+        case .primary: Colors.Primary.normal
+        case .secondary: Colors.Primary.normal
+        case .assistive: Colors.Label.neutral
+        case .text: Colors.Static.clear
         }
     }
     
     var strokeColor: Colorable {
         switch self {
-        case .primary: Sementic.Primary.normal
-        case .secondary: Sementic.Primary.assistive
-        case .assistive: Sementic.Fill.neutral
-        case .text: Sementic.Static.clear
+        case .primary: Colors.Primary.normal
+        case .secondary: Colors.Primary.assistive
+        case .assistive: Colors.Fill.neutral
+        case .text: Colors.Static.clear
         }
     }
 }

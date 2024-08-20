@@ -14,8 +14,8 @@ public struct MyToggle: View {
         Toggle("", isOn: $isOn)
             .tint(
                 isOn
-                ? Sementic.Primary.normal
-                : Sementic.Fill.alternative
+                ? Colors.Primary.normal
+                : Colors.Fill.alternative
             )
             .fixedSize()
     }

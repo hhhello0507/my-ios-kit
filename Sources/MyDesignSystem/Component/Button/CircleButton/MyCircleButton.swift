@@ -61,7 +61,7 @@ public struct MyCircleButton: View {
                 .opacity(!isLoading ? 1 : 0)
                 .frame(width: size.iconSize, height: size.iconSize)
                 .frame(width: size.size, height: size.size)
-                .background(isStroke ? Sementic.Static.clear : role.background)
+                .background(isStroke ? Colors.Static.clear : role.background)
                 .stroke(size.size / 2, content: role.strokeColor.box.color, lineWidth: isStroke ? 1 : 0)
                 .opacity(mergedEnabled ? 1 : 0.5)
         }

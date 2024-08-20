@@ -28,7 +28,7 @@ public struct MyDivider: View {
         Rectangle()
             .frame(maxWidth: .infinity)
             .frame(height: type.height)
-            .foreground(Sementic.Line.normal)
+            .foreground(Colors.Line.normal)
     }
 }
 

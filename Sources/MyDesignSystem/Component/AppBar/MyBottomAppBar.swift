@@ -53,7 +53,7 @@ public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarIte
                 } label: {
                     MyBottomAppBarItem(type: tab, isSelected: selection == tab)
                         .frame(maxWidth: .infinity)
-                        .background(Sementic.Background.neutral)
+                        .background(Colors.Background.neutral)
                 }
                 .applyAnimation()
             }
@@ -67,8 +67,8 @@ public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarIte
         #endif
         .padding(.vertical, 8)
         .padding(.horizontal, 8)
-        .background(Sementic.Background.neutral)
-        .stroke(0, content: Sementic.Line.alternative.box.color)
+        .background(Colors.Background.neutral)
+        .stroke(0, content: Colors.Line.alternative.box.color)
         .padding(.horizontal, -1)
         .padding(.bottom, -1)
     }

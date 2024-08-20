@@ -123,7 +123,7 @@ public struct MyButton: View {
             .padding(.horizontal, size.horizontalPadding)
             .frame(height: size.height)
             .opacity(!isLoading ? 1 : 0)
-            .background(isStroke ? Sementic.Static.clear : role.background)
+            .background(isStroke ? Colors.Static.clear : role.background)
             .cornerRadius(isRounded ? size.height / 2 : size.cornerRadius)
             .stroke(isRounded ? size.height / 2 : size.cornerRadius, content: role.strokeColor.box.color, lineWidth: isStroke ? 1 : 0)
             .opacity(mergedEnabled ? 1 : 0.5)

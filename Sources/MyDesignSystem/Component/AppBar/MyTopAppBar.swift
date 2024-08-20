@@ -37,7 +37,7 @@ public struct MyTopAppBar<C>: View where C: View {
     
     public static func `default`(
         title: String,
-        background: Colorable = Sementic.Background.neutral,
+        background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
@@ -52,7 +52,7 @@ public struct MyTopAppBar<C>: View where C: View {
 
     public static func small(
         title: String,
-        background: Colorable = Sementic.Background.neutral,
+        background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
         @ViewBuilder content: @escaping () -> C
     ) -> Self {
@@ -91,7 +91,7 @@ public struct MyTopAppBar<C>: View where C: View {
                     }
                     Text(title)
                         .myFont(type == .default ? .title1B : .headlineM)
-                        .foreground(Sementic.Label.normal)
+                        .foreground(Colors.Label.normal)
                     Spacer()
                     ForEach(buttons.indices, id: \.self) {
                         makeButton(button: buttons[$0])
@@ -115,7 +115,7 @@ public struct MyTopAppBar<C>: View where C: View {
                 .resizable()
                 .renderingMode(.template)
                 .frame(width: 24, height: 24)
-                .foreground(Sementic.Label.alternative)
+                .foreground(Colors.Label.alternative)
                 .opacity(0.5)
                 .padding(12)
         }

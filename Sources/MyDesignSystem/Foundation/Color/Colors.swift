@@ -23,7 +23,7 @@ public struct ColorBox {
     }
 }
 
-public enum Sementic {
+public enum Colors {
     public enum Label: Colorable, CaseIterable {
         case normal, strong, neutral, alternative, assistive, disable
         public var box: ColorBox {
@@ -100,29 +100,29 @@ public enum Sementic {
     }
 }
 
-private struct SementicPreview: View {
+private struct ColorsPreview: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(Sementic.Label.allCases, id: \.self) {
+                ForEach(Colors.Label.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
-                ForEach(Sementic.Line.allCases, id: \.self) {
+                ForEach(Colors.Line.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
-                ForEach(Sementic.Fill.allCases, id: \.self) {
+                ForEach(Colors.Fill.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
-                ForEach(Sementic.Background.allCases, id: \.self) {
+                ForEach(Colors.Background.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
-                ForEach(Sementic.Elevation.allCases, id: \.self) {
+                ForEach(Colors.Elevation.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
-                ForEach(Sementic.Static.allCases, id: \.self) {
+                ForEach(Colors.Static.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
-                ForEach(Sementic.Primary.allCases, id: \.self) {
+                ForEach(Colors.Primary.allCases, id: \.self) {
                     $0.box.color.frame(height: 30)
                 }
             }
@@ -131,10 +131,10 @@ private struct SementicPreview: View {
 }
 
 #Preview {
-    SementicPreview()
+    ColorsPreview()
 }
 
 #Preview {
-    SementicPreview()
+    ColorsPreview()
         .preferredColorScheme(.dark)
 }

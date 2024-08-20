@@ -53,13 +53,13 @@ public struct MyAvatar: View {
     @ViewBuilder
     private var label: some View {
         Circle()
-            .foreground(Sementic.Fill.alternative)
+            .foreground(Colors.Fill.alternative)
             .frame(width: type.size, height: type.size)
             .overlay {
                 Image(icon: Icons.Feature.Person)
                     .resizable()
                     .renderingMode(.template)
-                    .foreground(Sementic.Fill.assistive)
+                    .foreground(Colors.Fill.assistive)
                     .frame(width: type.size, height: type.size)
                     .offset(y: type.size / 6.0)
             }

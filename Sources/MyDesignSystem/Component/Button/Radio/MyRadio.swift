@@ -24,12 +24,12 @@ public struct MyRadio: View {
                 if selected {
                     Circle()
                         .frame(width: 10.5, height: 10.5)
-                        .stroke(5.25, content: Sementic.Primary.normal.box.color, lineWidth: 5)
+                        .stroke(5.25, content: Colors.Primary.normal.box.color, lineWidth: 5)
                         .foregroundStyle(.clear)
                 } else {
                     Circle()
                         .frame(width: 14, height: 14)
-                        .stroke(7, content: Sementic.Line.normal.box.color, lineWidth: 2)
+                        .stroke(7, content: Colors.Line.normal.box.color, lineWidth: 2)
                         .foregroundStyle(.clear)
                 }
             }
@@ -59,7 +59,7 @@ public struct MyRadio: View {
                 }
             }
             .padding(16)
-            .background(Sementic.Background.normal)
+            .background(Colors.Background.normal)
             .registerWanted()
         }
     }

@@ -30,11 +30,11 @@ public struct MyDialogPresenter<C: View>: ModalViewProtocol {
                         VStack(alignment: .leading, spacing: 12) {
                             Text(dialog.title)
                                 .myFont(.headling2B)
-                                .foreground(Sementic.Label.strong)
+                                .foreground(Colors.Label.strong)
                             if let message = dialog.message {
                                 Text(message)
                                     .myFont(.bodyM)
-                                    .foreground(Sementic.Label.alternative)
+                                    .foreground(Colors.Label.alternative)
                             }
                         }
                         Spacer()
@@ -54,7 +54,7 @@ public struct MyDialogPresenter<C: View>: ModalViewProtocol {
                             } else {
                                 HStack {
                                     Spacer()
-                                    MyButton.text(secondaryButton.title, foreground: Sementic.Primary.normal) {
+                                    MyButton.text(secondaryButton.title, foreground: Colors.Primary.normal) {
                                         secondaryButton.action()
                                         dismiss()
                                     }
@@ -65,14 +65,14 @@ public struct MyDialogPresenter<C: View>: ModalViewProtocol {
                             HStack {
                                 Spacer()
                                 if let primaryButton = dialog.primaryButton {
-                                    MyButton.text(primaryButton.title, foreground: Sementic.Primary.normal) {
+                                    MyButton.text(primaryButton.title, foreground: Colors.Primary.normal) {
                                         primaryButton.action()
                                         dismiss()
                                     }
                                     .size(.medium)
                                 } else {
                                     
-                                    MyButton.text("닫기", foreground: Sementic.Primary.normal) {
+                                    MyButton.text("닫기", foreground: Colors.Primary.normal) {
                                         dismiss()
                                     }
                                     .size(.medium)

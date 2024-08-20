@@ -7,9 +7,9 @@ public enum MyElevation {
     
     var color: Colorable {
         switch self {
-        case .evBlack1: Sementic.Elevation.black1
-        case .evBlack2: Sementic.Elevation.black2
-        case .evBlack3: Sementic.Elevation.black3
+        case .evBlack1: Colors.Elevation.black1
+        case .evBlack2: Colors.Elevation.black2
+        case .evBlack3: Colors.Elevation.black3
         }
     }
     

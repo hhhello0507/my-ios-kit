@@ -7,7 +7,7 @@ struct BaseModal<MC: View, C: View>: View {
     @State private var scaleEffect: CGFloat = 1.2
     @Binding var isPresent: Bool
     @State var opacity: Double = 0.0
-    let backgroundColor: Colorable = Sementic.Background.normal
+    let backgroundColor: Colorable = Colors.Background.normal
     let cornerRadius: CGFloat = 16
 //    let shadow: SeugiShadowSystem = .evBlack(.ev1)
     @ViewBuilder let content: () -> C

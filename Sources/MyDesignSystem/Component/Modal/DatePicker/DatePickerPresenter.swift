@@ -101,7 +101,7 @@ public struct MyDatePickerPresenter<C: View>: ModalViewProtocol {
         VStack(spacing: 4) {
             Text(datePicker.title)
                 .myFont(.headling2B)
-                .foreground(Sementic.Label.strong)
+                .foreground(Colors.Label.strong)
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 8) {
                 Text(
@@ -110,7 +110,7 @@ public struct MyDatePickerPresenter<C: View>: ModalViewProtocol {
                     + String(calendar.dateComponents([.month], from: provider.monthDate).month ?? 0)
                     + "월")
                 .myFont(.bodyM)
-                .foreground(Sementic.Label.strong)
+                .foreground(Colors.Label.strong)
                 Spacer()
                 Button {
                     if let date = calendar.date(byAdding: .month, value: -1, to: provider.monthDate) {
@@ -120,7 +120,7 @@ public struct MyDatePickerPresenter<C: View>: ModalViewProtocol {
                     Image(icon: Icons.Arrow.ExpandArrow)
                         .resizable()
                         .renderingMode(.template)
-                        .foreground(Sementic.Primary.normal)
+                        .foreground(Colors.Primary.normal)
                         .frame(width: 20, height: 20)
                         .padding(8)
                 }
@@ -132,7 +132,7 @@ public struct MyDatePickerPresenter<C: View>: ModalViewProtocol {
                     Image(icon: Icons.Arrow.ExpandArrow)
                         .resizable()
                         .renderingMode(.template)
-                        .foreground(Sementic.Primary.normal)
+                        .foreground(Colors.Primary.normal)
                         .frame(width: 20, height: 20)
                         .padding(8)
                         .rotationEffect(.degrees(180))
@@ -150,7 +150,7 @@ public struct MyDatePickerPresenter<C: View>: ModalViewProtocol {
                 ForEach(weekdays, id: \.self) { week in
                     Text(week)
                         .myFont(.labelR)
-                        .foreground(Sementic.Label.alternative)
+                        .foreground(Colors.Label.alternative)
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -180,13 +180,13 @@ public struct MyDatePickerPresenter<C: View>: ModalViewProtocol {
                                 }())
                                 .foreground(
                                     selected
-                                    ? Sementic.Static.white
-                                    : Sementic.Label.alternative
+                                    ? Colors.Static.white
+                                    : Colors.Label.alternative
                                 )
                                 .background {
                                     if selected {
                                         Rectangle()
-                                            .fill(Sementic.Primary.normal)
+                                            .fill(Colors.Primary.normal)
                                             .frame(width: 38, height: 38)
                                             .cornerRadius(10, corners: .allCorners)
                                     }
