@@ -5,11 +5,11 @@ public enum MyElevation {
     case evBlack2
     case evBlack3
     
-    var color: Color {
+    var color: Colorable {
         switch self {
-        case .evBlack1: .init(0x000000, opacity: 0.02)
-        case .evBlack2: .init(0x000000, opacity: 0.04)
-        case .evBlack3: .init(0x000000, opacity: 0.06)
+        case .evBlack1: Sementic.Elevation.black1
+        case .evBlack2: Sementic.Elevation.black2
+        case .evBlack3: Sementic.Elevation.black3
         }
     }
     
