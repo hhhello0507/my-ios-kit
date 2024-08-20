@@ -42,12 +42,14 @@ public struct MyCardView<C>: View where C: View {
                 .myFont(.headling1B)
                 .foreground(Colors.Label.normal)
             Spacer()
-            Image(icon: Icons.Arrow.ExpandArrow)
-                .resizable()
-                .renderingMode(.template)
-                .frame(width: 12, height: 12)
-                .rotationEffect(.degrees(180))
-                .foreground(Colors.Label.assistive)
+            if headingAction != nil {
+                Image(icon: Icons.Arrow.ExpandArrow)
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 12, height: 12)
+                    .rotationEffect(.degrees(180))
+                    .foreground(Colors.Label.assistive)
+            }
         }
         .padding(.horizontal, 6)
         .background(Colors.Background.normal)
