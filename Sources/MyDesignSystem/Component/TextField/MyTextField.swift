@@ -78,9 +78,10 @@ public struct MyTextField: View {
         .padding(.vertical, 4)
         .tint(Colors.Primary.normal) // indicator color
         .overlay {
-            Divider()
+            Rectangle()
                 .foreground(Colors.Line.normal)
-                .frame(maxHeight: .infinity, alignment: .bottom)
+                .frame(height: 1)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .opacity(opacity)
         .disabled(!isEnabled)
