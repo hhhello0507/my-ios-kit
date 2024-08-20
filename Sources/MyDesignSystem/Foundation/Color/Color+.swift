@@ -25,3 +25,9 @@ public extension View {
         self.tint(color.box.color)
     }
 }
+
+public extension Shape {
+    func fill(_ color: Colorable) -> some View {
+        self.fill(color.box.color)
+    }
+}

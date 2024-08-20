@@ -8,6 +8,7 @@ public struct MyButton: View {
     private let role: ButtonRole
     private let leadingIcon: Iconable?
     private let trailingIcon: Iconable?
+    private let foreground: Colorable?
     private let isEnabled: Bool
     private let isLoading: Bool
     private let isRounded: Bool
@@ -19,11 +20,16 @@ public struct MyButton: View {
     }
     
     private var adjustedForeground: Colorable {
-        isStroke ? role.strokeForeground : role.foreground
+        if let foreground {
+            foreground
+        } else {
+            isStroke ? role.strokeForeground : role.foreground
+        }
     }
     
     private var maxWidth: CGFloat? {
-        if size == .larger {
+        if case .larger(let expanded) = size,
+           expanded {
             .infinity
         } else {
             nil
@@ -31,11 +37,12 @@ public struct MyButton: View {
     }
     
     public init(
-        size: ButtonSize = .larger,
+        size: ButtonSize = .larger(expanded: true),
         _ text: String,
         role: ButtonRole = .primary,
         leadingIcon: Iconable? = nil,
         trailingIcon: Iconable? = nil,
+        foreground: Colorable? = nil,
         isEnabled: Bool = true,
         isLoading: Bool = false,
         isRounded: Bool = false,
@@ -47,11 +54,36 @@ public struct MyButton: View {
         self.role = role
         self.leadingIcon = leadingIcon
         self.trailingIcon = trailingIcon
+        self.foreground = foreground
         self.isEnabled = isEnabled
         self.isLoading = isLoading
         self.isRounded = isRounded
         self.isStroke = isStroke
         self.action = action
+    }
+    
+    public static func text(
+        _ text: String,
+        leadingIcon: Iconable? = nil,
+        trailingIcon: Iconable? = nil,
+        foreground: Colorable? = nil,
+        isEnabled: Bool = true,
+        isLoading: Bool = false,
+        action: @escaping () -> Void
+    ) -> Self {
+        Self.init(
+            size: .larger(expanded: false),
+            text,
+            role: .text,
+            leadingIcon: leadingIcon,
+            trailingIcon: trailingIcon,
+            foreground: foreground,
+            isEnabled: isEnabled,
+            isLoading: isLoading,
+            isRounded: false,
+            isStroke: false,
+            action: action
+        )
     }
     
     public func size(_ size: ButtonSize) -> Self {
@@ -61,6 +93,7 @@ public struct MyButton: View {
             role: role,
             leadingIcon: leadingIcon,
             trailingIcon: trailingIcon,
+            foreground: foreground,
             isEnabled: isEnabled,
             isLoading: isLoading,
             isRounded: isRounded,
@@ -122,7 +155,13 @@ private struct ButtonPreview: View {
                 }
                 ForEach(ButtonRole.allCases, id: \.self) { role in
                     VStack(spacing: 24) {
-                        ForEach(ButtonSize.allCases.filter { $0 != .larger }, id: \.self) { size in
+                        ForEach(ButtonSize.allCases.filter { 
+                            if case .larger(let expanded) = $0, expanded {
+                                false
+                            } else {
+                                true
+                            }
+                        }, id: \.self) { size in
                             VStack {
                                 MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank) {}.size(size)
                                 MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank, isLoading: true) {}.size(size)

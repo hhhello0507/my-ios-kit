@@ -11,12 +11,14 @@ public enum ButtonRole: CaseIterable {
     case primary
     case secondary
     case assistive
+    case text
     
     var foreground: Colorable {
         switch self {
         case .primary: Sementic.Static.white
         case .secondary: Sementic.Primary.normal
         case .assistive: Sementic.Label.neutral
+        case .text: Sementic.Label.normal
         }
     }
     
@@ -25,6 +27,7 @@ public enum ButtonRole: CaseIterable {
         case .primary: Sementic.Primary.normal
         case .secondary: Sementic.Primary.assistive
         case .assistive: Sementic.Fill.neutral
+        case .text: Sementic.Static.clear
         }
     }
     
@@ -33,6 +36,7 @@ public enum ButtonRole: CaseIterable {
         case .primary: Sementic.Primary.normal
         case .secondary: Sementic.Primary.normal
         case .assistive: Sementic.Label.neutral
+        case .text: Sementic.Static.clear
         }
     }
     
@@ -41,6 +45,7 @@ public enum ButtonRole: CaseIterable {
         case .primary: Sementic.Primary.normal
         case .secondary: Sementic.Primary.assistive
         case .assistive: Sementic.Fill.neutral
+        case .text: Sementic.Static.clear
         }
     }
 }
