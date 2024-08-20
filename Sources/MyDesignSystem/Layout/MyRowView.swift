@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct RowView: View {
+public struct MyRowView: View {
     
     private let title: String
     private let description: String?
@@ -36,13 +36,13 @@ public struct RowView: View {
                     Text(description)
                         .myFont(.bodyM)
                         .foreground(Colors.Label.assistive)
+                    Image(icon: Icons.Arrow.ExpandArrow)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foreground(Colors.Label.alternative)
+                        .frame(width: 12, height: 12)
+                        .rotationEffect(.degrees(180))
                 }
-                Image(icon: Icons.Arrow.ExpandArrow)
-                    .resizable()
-                    .renderingMode(.template)
-                    .foreground(Colors.Label.alternative)
-                    .frame(width: 12, height: 12)
-                    .rotationEffect(.degrees(180))
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -53,7 +53,7 @@ public struct RowView: View {
 }
 
 #Preview {
-    RowView("Title", description: "Description") {
+    MyRowView("Title", description: "Description") {
         print("WOW")
     }
     .registerWanted()
