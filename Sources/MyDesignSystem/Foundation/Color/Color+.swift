@@ -12,6 +12,12 @@ public extension Color {
     }
 }
 
+public extension Text {
+    func foreground(_ color: Colorable) -> Text {
+        self.foregroundColor(color.box.color)
+    }
+}
+
 public extension View {
     func foreground(_ color: Colorable) -> some View {
         self.foregroundStyle(color.box.color)
