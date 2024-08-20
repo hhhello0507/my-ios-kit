@@ -34,7 +34,7 @@ public struct MySegmentedButton<T: SegmentedButtonProtocol>: View {
                     }
                 } label: {
                     Text(item.text)
-                        .myFont(.headline2M)
+                        .myFont(.headlineM)
                         .foreground(Sementic.Label.normal)
                         .opacity(isSelected ? 1 : 0.5)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

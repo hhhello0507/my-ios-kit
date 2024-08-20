@@ -9,13 +9,21 @@ public enum MyFont: CaseIterable {
     case title2M
     case title2R
     
-    case headline1B
-    case headline1M
-    case headline1R
+    case title3B
+    case title3M
+    case title3R
     
-    case headline2B
-    case headline2M
-    case headline2R
+    case headling1B
+    case headling1M
+    case headling1R
+    
+    case headling2B
+    case headling2M
+    case headling2R
+    
+    case headlineB
+    case headlineM
+    case headlineR
     
     case bodyB
     case bodyM

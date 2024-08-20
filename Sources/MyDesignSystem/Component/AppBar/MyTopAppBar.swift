@@ -90,10 +90,9 @@ public struct MyTopAppBar<C>: View where C: View {
                         Spacer().frame(width: 8)
                     }
                     Text(title)
-                        .myFont(type == .default ? .title1B : .headline2M)
+                        .myFont(type == .default ? .title1B : .headlineM)
                         .foreground(Sementic.Label.normal)
                     Spacer()
-                    
                     ForEach(buttons.indices, id: \.self) {
                         makeButton(button: buttons[$0])
                     }
