@@ -48,7 +48,7 @@ public struct MyRowView: View {
             .padding(.vertical, 8)
             .background(Colors.Background.normal)
         }
-        .applyAnimation()
+        .scaledButton()
     }
 }
 

@@ -27,19 +27,21 @@ public enum TopAppBarType {
 @available(iOS 15.0, macOS 13.0, *)
 public struct MyTopAppBar<C>: View where C: View {
     
+    private let edgeInsets = EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
+    
     @Environment(\.dismiss) private var dismiss
     
     private let title: String
     private let type: TopAppBarType
     private let background: Colorable
     private let buttons: [TopAppBarButton]
-    private let content: () -> C
+    private let content: (EdgeInsets) -> C
     
     public static func `default`(
         title: String,
         background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
-        @ViewBuilder content: @escaping () -> C
+        @ViewBuilder content: @escaping (EdgeInsets) -> C
     ) -> Self {
         self.init(
             title: title,
@@ -54,7 +56,7 @@ public struct MyTopAppBar<C>: View where C: View {
         title: String,
         background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
-        @ViewBuilder content: @escaping () -> C
+        @ViewBuilder content: @escaping (EdgeInsets) -> C
     ) -> Self {
         self.init(
             title: title,
@@ -100,7 +102,8 @@ public struct MyTopAppBar<C>: View where C: View {
                 .frame(height: 54)
                 .background(background)
                 .padding(.horizontal, 4)
-                content()
+                content(edgeInsets)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 Spacer()
             }
         }
@@ -130,14 +133,14 @@ public struct MyTopAppBar<C>: View where C: View {
                 
             }
         ]
-    ) {
+    ) { _ in
         
     }
     .registerWanted()
 }
 
 #Preview {
-    MyTopAppBar.small(title: "제목") {
+    MyTopAppBar.small(title: "제목") { _ in
         
     }
     .registerWanted()

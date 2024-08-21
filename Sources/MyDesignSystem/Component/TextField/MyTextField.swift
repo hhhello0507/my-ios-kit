@@ -64,7 +64,7 @@ public struct MyTextField: View {
                     .padding(4)
                     .opacity(text.isEmpty ? 0 : 0.5)
             }
-            .applyAnimation()
+            .scaledButton()
         }
 #if canImport(UIKit)
         .textInputAutocapitalization(.never)

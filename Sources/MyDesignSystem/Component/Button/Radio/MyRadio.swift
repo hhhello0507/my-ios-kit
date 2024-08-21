@@ -35,7 +35,7 @@ public struct MyRadio: View {
             }
             .padding(3)
         }
-        .applyAnimation()
+        .scaledButton()
         .frame(width: 40, height: 40)
         .disabled(!isEnabled)
         .opacity(selected ? 1 : 0.5)

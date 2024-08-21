@@ -42,7 +42,7 @@ public struct MyCheckbox: View {
             }
             .padding(3)
         }
-        .applyAnimation()
+        .scaledButton()
         .frame(width: 40, height: 40)
         .disabled(!isEnabled)
     }

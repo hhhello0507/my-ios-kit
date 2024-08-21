@@ -66,7 +66,7 @@ public struct MyCircleButton: View {
                 .opacity(mergedEnabled ? 1 : 0.5)
         }
         .disabled(!mergedEnabled)
-        .applyAnimation()
+        .scaledButton()
         .overlay {
             if isLoading {
                 ProgressView()

@@ -55,7 +55,7 @@ public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarIte
                         .frame(maxWidth: .infinity)
                         .background(Colors.Background.neutral)
                 }
-                .applyAnimation()
+                .scaledButton()
             }
         }
         #if canImport(UIKit)

@@ -49,7 +49,7 @@ public struct MySegmentedButton<T: SegmentedButtonProtocol>: View {
                             }
                         }
                 }
-                .applyAnimation()
+                .scaledButton()
                 .zIndex(isSelected ? 1 : 0)
             }
         }

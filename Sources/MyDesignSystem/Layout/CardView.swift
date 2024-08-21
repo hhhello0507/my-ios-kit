@@ -24,7 +24,7 @@ public struct MyCardView<C>: View where C: View {
                 } label: {
                     heading
                 }
-                .applyAnimation()
+                .scaledButton()
             } else {
                 heading
             }
