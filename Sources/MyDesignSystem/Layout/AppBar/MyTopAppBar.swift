@@ -83,6 +83,8 @@ public struct MyTopAppBar<C>: View where C: View {
                         } label: {
                             Image(icon: Icons.Arrow.ExpandArrow)
                                 .resizable()
+                                .renderingMode(.template)
+                                .foreground(Colors.Label.normal)
                                 .frame(width: 24, height: 24)
                                 .padding(12)
                         }
@@ -144,4 +146,5 @@ public struct MyTopAppBar<C>: View where C: View {
         
     }
     .registerWanted()
+    .preferredColorScheme(.dark)
 }
