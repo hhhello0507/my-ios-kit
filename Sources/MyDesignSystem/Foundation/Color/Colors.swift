@@ -98,6 +98,16 @@ public enum Colors {
             }
         }
     }
+    public enum Status: Colorable, CaseIterable {
+        case negative, cautionary, positive
+        public var box: ColorBox {
+            switch self {
+            case .negative: ColorBox(Palette.red50, Palette.red50)
+            case .cautionary: ColorBox(Palette.yellow50, Palette.yellow50)
+            case .positive: ColorBox(Palette.green50, Palette.green50)
+            }
+        }
+    }
 }
 
 private struct ColorsPreview: View {

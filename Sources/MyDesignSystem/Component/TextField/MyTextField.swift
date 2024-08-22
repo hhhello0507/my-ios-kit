@@ -2,92 +2,83 @@ import SwiftUI
 
 public struct MyTextField: View {
     
-    // MARK: - State
-    @FocusState private var focused: Bool
-    @Binding private var text: String
     @State private var isHide = true
+    @FocusState private var focused
     
     // MARK: - parameters
     private let hint: String
+    @Binding private var text: String
+    private let font: MyFont
+    private let supportText: String?
     private let isSecured: Bool
     private let isEnabled: Bool
+    private let isError: Bool
+    private let colors: TextFieldColors
     
     public init(
         _ hint: String = "",
         text: Binding<String>,
+        font: MyFont = .headlineM,
+        supportText: String? = nil,
         isSecured: Bool = false,
-        isEnabled: Bool = true
+        isEnabled: Bool = true,
+        isError: Bool = false,
+        colors: TextFieldColors = .default
     ) {
         self.hint = hint
         self._text = text
+        self.font = font
+        self.supportText = supportText
         self.isSecured = isSecured
         self.isEnabled = isEnabled
-    }
-    
-    private var opacity: CGFloat {
-        isEnabled ? 1 : 0.5
+        self.isError = isError
+        self.colors = colors
     }
     
     // MARK: - View
     public var body: some View {
         HStack(spacing: 0) {
-            if isSecured && isHide {
-                SecureField(
-                    hint,
-                    text: $text,
-                    prompt: Text(hint).foreground(Colors.Label.assistive)
-                )
-            } else {
-                TextField(
-                    hint,
-                    text: $text,
-                    prompt: Text(hint).foreground(Colors.Label.assistive)
-                )
-            }
-            let icon: Iconable = if isSecured {
-                isHide ? Icons.Visible.Hide : Icons.Visible.Show
-            } else {
-                Icons.Cross.CrossFill
-            }
-            Button {
+            BaseTextField(
+                hint,
+                text: $text,
+                font: font,
+                supportText: supportText,
+                isSecured: isSecured && isHide,
+                isEnabled: isEnabled,
+                isError: isError,
+                colors: colors
+            )
+            TextFieldIcon(
+                isHide: isHide,
+                isSecured: isSecured,
+                isEnabled: !text.isEmpty,
+                isError: isError,
+                colors: colors
+            ) {
                 if isSecured {
                     isHide.toggle()
                 } else {
                     text = ""
                 }
-            } label: {
-                Image(icon: icon)
-                    .resizable()
-                    .renderingMode(.template)
-                    .foreground(Colors.Label.alternative)
-                    .frame(width: 24, height: 24)
-                    .padding(4)
-                    .opacity(text.isEmpty ? 0 : 0.5)
             }
-            .scaledButton()
         }
-#if canImport(UIKit)
-        .textInputAutocapitalization(.never)
-#endif
-        .autocorrectionDisabled()
-        .textContentType(.init(rawValue: ""))
-        .focused($focused)
-        .myFont(.headlineM)
-        .foreground(Colors.Label.strong) // text color
-        .frame(height: 43)
-        .padding(.vertical, 4)
-        .tint(Colors.Primary.normal) // indicator color
+        // Layout
         .overlay {
             Rectangle()
-                .foreground(Colors.Line.normal)
+                .foreground(
+                    isError
+                    ? colors.errorStrokeColor
+                    : focused
+                    ? colors.focusedStrokeColor
+                    : colors.strokeColor
+                )
                 .frame(height: 1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
-        .opacity(opacity)
-        .disabled(!isEnabled)
-        .onTapGesture {
-            focused = true
-        }
+        .frame(height: 43)
+        .padding(.vertical, 4)
+        .focused($focused)
+        .advancedFocus()
     }
 }
 
@@ -95,8 +86,8 @@ struct TextFieldPreview: View {
     @State private var text = ""
     var body: some View {
         VStack {
-            MyTextField("Label", text: $text)
-            MyTextField("Label", text: $text, isSecured: true)
+            MyTextField("Label", text: $text, supportText: "Support Text")
+            MyTextField("Label", text: $text, supportText: "Support Text", isSecured: true, isError: true)
             MyTextField("Label", text: $text, isEnabled: false)
         }
         .registerWanted()
