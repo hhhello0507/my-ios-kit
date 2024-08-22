@@ -17,25 +17,17 @@ public struct TextFieldColors {
     public let iconColor: Colorable
 
     // focused
-    public let tintColor: Colorable // for indicator color
-    public let focusedStrokeColor: Colorable
+    public let primaryColor: Colorable // for indicator color
     
     // error
-    public let errorStrokeColor: Colorable
-    public let errorIconColor: Colorable
-    public let errorTintColor: Colorable
-    public let errorSupportTextColor: Colorable
+    public let errorColor: Colorable
     
     public static let `default` = TextFieldColors(
         hintColor: Colors.Label.assistive,
         strokeColor: Colors.Line.normal,
         foregroundColor: Colors.Label.strong,
         iconColor: Colors.Label.alternative,
-        tintColor: Colors.Primary.normal,
-        focusedStrokeColor: Colors.Primary.normal,
-        errorStrokeColor: Colors.Status.negative,
-        errorIconColor: Colors.Status.negative,
-        errorTintColor: Colors.Status.negative,
-        errorSupportTextColor: Colors.Status.negative
+        primaryColor: Colors.Primary.normal,
+        errorColor: Colors.Status.negative
     )
 }

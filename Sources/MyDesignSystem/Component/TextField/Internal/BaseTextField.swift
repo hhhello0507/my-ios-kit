@@ -9,13 +9,19 @@ import SwiftUI
 
 internal struct BaseTextField: View {
     
+    // MARK: - Parameters
+    // text
     private let hint: String
     @Binding private var text: String
     private let font: MyFont
     private let supportText: String?
+    
+    // state
     private let isSecured: Bool
     private let isEnabled: Bool
     private let isError: Bool
+    
+    // style
     private let colors: TextFieldColors
     
     init(
@@ -54,28 +60,14 @@ internal struct BaseTextField: View {
                 )
             }
         }
-        .overlay {
-            if let supportText {
-                Text(supportText)
-                    .myFont(.labelM)
-                    .foreground(
-                        isError
-                        ? colors.errorSupportTextColor
-                        : Colors.Label.alternative
-                    )
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    .offset(y: 24)
-            }
-        }
         // style
         .myFont(font)
         .foreground(colors.foregroundColor)
         .tint(
             isError
-            ? colors.errorTintColor
-            : colors.tintColor
+            ? colors.errorColor
+            : colors.primaryColor
         )
-        .opacity(isEnabled ? 1 : 0.5)
         // interaction
         .disabled(!isEnabled)
         // optimization

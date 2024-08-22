@@ -34,7 +34,7 @@ internal struct TextFieldIcon: View {
             .renderingMode(.template)
             .foreground(
                 isError
-                ? colors.errorIconColor
+                ? colors.errorColor
                 : colors.iconColor
             )
             .frame(width: 24, height: 24)

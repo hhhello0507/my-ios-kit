@@ -62,30 +62,44 @@ public struct MyTextField: View {
                 }
             }
         }
+        .frame(height: 43)
+        .padding(.vertical, 4)
         // Layout
         .overlay {
             Rectangle()
                 .foreground(
                     isError
-                    ? colors.errorStrokeColor
+                    ? colors.errorColor
                     : focused
-                    ? colors.focusedStrokeColor
+                    ? colors.primaryColor
                     : colors.strokeColor
                 )
                 .frame(height: 1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
-        .frame(height: 43)
-        .padding(.vertical, 4)
+        .overlay {
+            if let supportText {
+                Text(supportText)
+                    .myFont(.labelM)
+                    .foreground(
+                        isError
+                        ? colors.errorColor
+                        : colors.foregroundColor
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .offset(y: 24)
+            }
+        }
         .focused($focused)
         .advancedFocus()
+        .opacity(isEnabled ? 1 : 0.5)
     }
 }
 
-struct TextFieldPreview: View {
+private struct TextFieldPreview: View {
     @State private var text = ""
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             MyTextField("Label", text: $text, supportText: "Support Text")
             MyTextField("Label", text: $text, supportText: "Support Text", isSecured: true, isError: true)
             MyTextField("Label", text: $text, isEnabled: false)

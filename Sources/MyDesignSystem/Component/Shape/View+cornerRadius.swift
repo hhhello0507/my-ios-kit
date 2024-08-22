@@ -14,4 +14,14 @@ public extension View {
                     .stroke(content, lineWidth: lineWidth)
             }
     }
+    
+    func stroke(_ radius: CGFloat, corners: RoundedCornerShape.RectCorner = .allCorners, color: Colorable, lineWidth: CGFloat = 1) -> some View {
+        let roundedCorner = RoundedCornerShape(radius: radius, corners: corners)
+        return self
+            .clipShape(roundedCorner)
+            .overlay {
+                roundedCorner
+                    .stroke(color.box.color, lineWidth: lineWidth)
+            }
+    }
 }
