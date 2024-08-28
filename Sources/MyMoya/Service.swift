@@ -3,7 +3,7 @@ import Moya
 import CombineMoya
 import Combine
 
-public class Service<Target: Endpoint> {
+open class Service<Target: Endpoint> {
     
     private var allowLog: Bool = true
     
