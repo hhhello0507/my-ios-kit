@@ -11,9 +11,13 @@ let package = Package(
             name: "MyDesignSystem",
             targets: ["MyDesignSystem"]
         ),
+        .library(
+            name: "MyShared",
+            targets: ["MyShared"]
+        ),
         .executable(
-            name: "MyDesignSystemClient", 
-            targets: ["MyDesignSystemClient"]
+            name: "MyIOSKitClient",
+            targets: ["MyIOSKitClient"]
         )
     ],
     dependencies: [
@@ -31,10 +35,15 @@ let package = Package(
                 .process("Resource/Assets.xcassets")
             ]
         ),
+        .target(
+            name: "MyShared",
+            dependencies: []
+        ),
         .executableTarget(
-            name: "MyDesignSystemClient",
+            name: "MyIOSKitClient",
             dependencies: [
-                .target(name: "MyDesignSystem")
+                .target(name: "MyDesignSystem"),
+                .target(name: "MyShared")
             ]
         )
     ]
