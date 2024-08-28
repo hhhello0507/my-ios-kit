@@ -5,69 +5,82 @@ import Combine
 
 public class Service<Target: Endpoint> {
     
-    func request<T: Decodable>(
+    private var allowLog: Bool = true
+    
+    func request<T: Decodable, ErrorRes: Decodable>(
         _ target: Target.Target,
-        res: T.Type
-    ) -> AnyPublisher<T, APIError> {
+        res: T.Type,
+        errorRes: ErrorRes.Type = EmptyErrorResponse.self
+    ) -> AnyPublisher<T, APIError<ErrorRes>> {
+        typealias APIErrorWithRes = APIError<ErrorRes>
         self.requestLog(target: target)
-        
-        let provider = switch target.authorization {
-//        case .authorization: Target.authProvider
-        case .none: Target.provider
-        }
-        
-        return provider
+        return Target.provider
             .requestPublisher(target)
             .filterSuccessfulStatusCodes() // 200..<300
             .tryMap { result in // map response
-//                self.responeLog(target: target, response: result) // TODO: asd
                 let value: T
                 do {
                     value = try myDecoder.decode(T.self, from: result.data)
                 } catch {
                    print("❌ Decoding Error - cause: \(error)")
-                   throw APIError.unknown
+                   throw APIErrorWithRes.unknown
                 }
+                self.responeLog(target: target, response: result)
                 return value
             }
             .mapError { error in // map error
-                print(error)
                 guard let error = error as? MoyaError,
                       let response = error.response else {
                     print("❌ Unknown Error")
-                    return APIError.unknown
+                    return APIErrorWithRes.unknown
                 }
                 if case .underlying(let error, _) = error,
                    let error = error.asAFError,
                    case .requestRetryFailed(let retryError, _) = error,
-                   let error = retryError as? APIError {
+                   let error = retryError as? APIErrorWithRes {
                     return error
                 }
                 self.responeLog(target: target, response: response)
-                return APIError.http
+                
+                guard (errorRes as? EmptyErrorResponse.Type) == nil else {
+                    return APIErrorWithRes.http
+                }
+                
+                guard let error = try? myDecoder.decode(ErrorRes.self, from: response.data) else {
+                    return APIErrorWithRes.decodingFailure
+                }
+                return APIErrorWithRes.httpWithResponse(error)
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
-    func performRequest<T: Decodable>(
+    public func performRequest<T: Decodable, ErrorRes: ErrorResponse>(
         _ target: Target.Target,
-        res: T.Type
-    ) -> AnyPublisher<T, APIError> {
-        request(target, res: T.self)
+        res: T.Type,
+        errorRes: ErrorRes.Type = EmptyErrorResponse.self
+    ) -> AnyPublisher<T, APIError<ErrorRes>> {
+        request(target, res: T.self, errorRes: errorRes)
     }
     
-    private func requestLog(target: Target.Target) {
+    public func allowLog(_ allowLog: Bool) {
+        self.allowLog = allowLog
+    }
+}
+
+private extension Service {
+    func requestLog(target: Target.Target) {
+        guard allowLog else {
+            return
+        }
         print("🛰 NETWORK Reqeust LOG")
         print(
             "URL: \(target.host)/\(target.path)\n"
             + "Header: \(target.headers ?? [:])\n"
             + "Method: \(target.method.rawValue)"
         )
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
         if case .requestJSONEncodable(let req) = target.task,
-           let json = try? encoder.encode(req) {
+           let json = try? myEncoder.encode(req) {
             print("Body: \(String(data: json, encoding: .utf8) ?? "-")")
         } else if case .requestParameters(let parameters, _) = target.task,
                   let json = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) {
@@ -79,7 +92,10 @@ public class Service<Target: Endpoint> {
         }
     }
     
-    private func responeLog(target: Target.Target, response: Moya.Response) {
+    func responeLog(target: Target.Target, response: Moya.Response) {
+        guard allowLog else {
+            return
+        }
         print("🛰 NETWORK Response LOG")
         print(
             "URL: \(target.host)/\(target.path)" + "\n"

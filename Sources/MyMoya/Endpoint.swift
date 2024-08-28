@@ -3,16 +3,10 @@ import Foundation
 
 public protocol Endpoint: TargetType {
     associatedtype Target: Endpoint
+    var baseUrlString: String { get }
     var host: String { get }
     var route: (Moya.Method, String, Moya.Task) { get }
-    var authorization: Authorization { get }
     static var provider: MoyaProvider<Target> { get }
-//    static var authProvider: MoyaProvider<Target> { get }
-}
-
-public enum Authorization {
-//    case authorization
-    case none
 }
 
 public extension Endpoint {
@@ -20,9 +14,7 @@ public extension Endpoint {
         Session()
     }
     var baseURL: URL {
-//        let baseUrl = Bundle.main.object(forInfoDictionaryKey: "BaseUrl") as? String ?? ""
-//        let baseUrl = "http://10.80.161.179:1234"
-        return URL(string: baseUrl)!
+        return URL(string: baseUrlString)!
             .appendingPathComponent(host)
     }
     
@@ -44,11 +36,6 @@ public extension Endpoint {
     
     var validationType: ValidationType {
         .successCodes
-    }
-    
-    var authorization: Authorization {
-//        .authorization
-        .none
     }
 }
 

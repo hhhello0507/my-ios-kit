@@ -15,6 +15,10 @@ let package = Package(
             name: "MyShared",
             targets: ["MyShared"]
         ),
+        .library(
+            name: "MyMoya",
+            targets: ["MyMoya"]
+        ),
         .executable(
             name: "MyIOSKitClient",
             targets: ["MyIOSKitClient"]
