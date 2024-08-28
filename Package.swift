@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "MyDesignSystem",
+    name: "MyIOSKit",
     platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
         .library(
