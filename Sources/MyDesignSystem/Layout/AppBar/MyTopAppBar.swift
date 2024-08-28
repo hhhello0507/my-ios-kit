@@ -24,7 +24,7 @@ public enum TopAppBarType {
     case small
 }
 
-@available(iOS 15.0, macOS 13.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 public struct MyTopAppBar<C>: View where C: View {
     
     private let edgeInsets = EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
@@ -109,7 +109,11 @@ public struct MyTopAppBar<C>: View where C: View {
                 Spacer()
             }
         }
-        .navigationBarBackButtonHidden()
+        .content { view in
+            if #available(macOS 13.0, *) {
+                view.navigationBarBackButtonHidden()
+            }
+        }
     }
     
     func makeButton(button: TopAppBarButton) -> some View {

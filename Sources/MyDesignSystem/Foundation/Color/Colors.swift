@@ -1,5 +1,13 @@
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKIt
+#endif
+
+#if canImport(AppKit)
+import AppKit
+#endif
+
 public protocol Colorable {
     var box: ColorBox { get }
 }
@@ -10,16 +18,6 @@ public struct ColorBox {
     public init(_ light: Color, _ dark: Color) {
         self.light = light
         self.dark = dark
-    }
-    
-    public var color: Color {
-        Color(UIColor {
-            if $0.userInterfaceStyle == .dark {
-                UIColor(dark)
-            } else {
-                UIColor(light)
-            }
-        })
     }
 }
 
