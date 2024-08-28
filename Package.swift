@@ -21,7 +21,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/kean/Nuke.git", exact: "12.3.0")
+        .package(url: "https://github.com/kean/Nuke.git", exact: "12.3.0"),
+        .package(url: "https://github.com/Moya/Moya.git", from: "15.0.3")
     ],
     targets: [
         .target(
@@ -38,6 +39,13 @@ let package = Package(
         .target(
             name: "MyShared",
             dependencies: []
+        ),
+        .target(
+            name: "MyMoya",
+            dependencies: [
+                .product(name: "Moya", package: "Moya"),
+                .product(name: "CombineMoya", package: "Moya")
+            ]
         ),
         .executableTarget(
             name: "MyIOSKitClient",
