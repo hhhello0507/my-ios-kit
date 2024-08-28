@@ -7,6 +7,10 @@ open class Service<Target: Endpoint> {
     
     private var allowLog: Bool = true
     
+    public init(allowLog: Bool) {
+        self.allowLog = allowLog
+    }
+    
     func request<T: Decodable, ErrorRes: Decodable>(
         _ target: Target.Target,
         res: T.Type,
@@ -61,10 +65,6 @@ open class Service<Target: Endpoint> {
         errorRes: ErrorRes.Type = EmptyErrorResponse.self
     ) -> AnyPublisher<T, APIError<ErrorRes>> {
         request(target, res: T.self, errorRes: errorRes)
-    }
-    
-    public func allowLog(_ allowLog: Bool) {
-        self.allowLog = allowLog
     }
 }
 
