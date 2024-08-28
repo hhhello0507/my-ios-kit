@@ -1,1 +1,5 @@
-# my-ios-designsystem 
+# my-ios-kit
+
+## Targets
+- MyDesignSystem
+- MyShared
