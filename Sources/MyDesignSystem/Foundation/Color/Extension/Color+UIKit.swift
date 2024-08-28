@@ -1,6 +1,6 @@
 #if canImport(UIKit)
 import SwiftUI
-import UIKIt
+import UIKit
 
 public extension ColorBox {
     public var color: Color {
