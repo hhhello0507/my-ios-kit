@@ -3,3 +3,4 @@
 ## Targets
 - MyDesignSystem
 - MyShared
+- MyMoya
