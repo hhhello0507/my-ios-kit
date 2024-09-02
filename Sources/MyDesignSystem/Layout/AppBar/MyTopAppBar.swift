@@ -42,7 +42,7 @@ public struct MyTopAppBar<C, TC>: View where C: View, TC: View {
         title: String,
         background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
-        trailingContent: @escaping () -> TC = { EmptyView() },
+        @ViewBuilder trailingContent: @escaping () -> TC = { EmptyView() },
         @ViewBuilder content: @escaping (EdgeInsets) -> C
     ) -> Self {
         self.init(
@@ -59,7 +59,7 @@ public struct MyTopAppBar<C, TC>: View where C: View, TC: View {
         title: String,
         background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
-        trailingContent: @escaping () -> TC = { EmptyView() },
+        @ViewBuilder trailingContent: @escaping () -> TC = { EmptyView() },
         @ViewBuilder content: @escaping (EdgeInsets) -> C
     ) -> Self {
         self.init(
