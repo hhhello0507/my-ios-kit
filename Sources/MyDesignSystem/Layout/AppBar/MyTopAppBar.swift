@@ -25,7 +25,7 @@ public enum TopAppBarType {
 }
 
 @available(iOS 15.0, macOS 12.0, *)
-public struct MyTopAppBar<C>: View where C: View {
+public struct MyTopAppBar<C, TC>: View where C: View, TC: View {
     
     private let edgeInsets = EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
     
@@ -35,12 +35,14 @@ public struct MyTopAppBar<C>: View where C: View {
     private let type: TopAppBarType
     private let background: Colorable
     private let buttons: [TopAppBarButton]
+    private let trailingContent: () -> TC
     private let content: (EdgeInsets) -> C
     
     public static func `default`(
         title: String,
         background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
+        trailingContent: @escaping () -> TC = { EmptyView() },
         @ViewBuilder content: @escaping (EdgeInsets) -> C
     ) -> Self {
         self.init(
@@ -48,6 +50,7 @@ public struct MyTopAppBar<C>: View where C: View {
             type: .default,
             background: background,
             buttons: buttons,
+            trailingContent: trailingContent,
             content: content
         )
     }
@@ -56,6 +59,7 @@ public struct MyTopAppBar<C>: View where C: View {
         title: String,
         background: Colorable = Colors.Background.neutral,
         buttons: [TopAppBarButton] = [],
+        trailingContent: @escaping () -> TC = { EmptyView() },
         @ViewBuilder content: @escaping (EdgeInsets) -> C
     ) -> Self {
         self.init(
@@ -63,6 +67,7 @@ public struct MyTopAppBar<C>: View where C: View {
             type: .small,
             background: background,
             buttons: buttons,
+            trailingContent: trailingContent,
             content: content
         )
     }
@@ -100,6 +105,7 @@ public struct MyTopAppBar<C>: View where C: View {
                     ForEach(buttons.indices, id: \.self) {
                         makeButton(button: buttons[$0])
                     }
+                    trailingContent()
                 }
                 .frame(height: 54)
                 .background(background)
