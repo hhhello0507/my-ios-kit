@@ -61,4 +61,8 @@ public enum Icons {
         case Substack
         case Write
     }
+    public enum Color: String, Iconable {
+        case AppleLogo
+        case GoogleLogo
+    }
 }
