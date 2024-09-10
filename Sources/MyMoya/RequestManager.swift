@@ -22,6 +22,8 @@ public struct DefaultRequestManager<_MyTarget: MyTarget>: RequestManager {
     
     public typealias _MyTarget = _MyTarget
     
+    public init() {}
+    
     public func request<T: Decodable, ErrorRes: Decodable>(
         _ target: _MyTarget,
         res: T.Type,
