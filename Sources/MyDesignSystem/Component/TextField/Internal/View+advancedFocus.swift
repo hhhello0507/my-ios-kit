@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-internal struct AdvancedFocusViewModifier: ViewModifier {
+struct AdvancedFocusViewModifier: ViewModifier {
     
     @FocusState private var focused: Bool
     
@@ -20,7 +20,7 @@ internal struct AdvancedFocusViewModifier: ViewModifier {
     }
 }
 
-internal extension View {
+public extension View {
     func advancedFocus() -> some View {
         self.modifier(AdvancedFocusViewModifier())
     }
