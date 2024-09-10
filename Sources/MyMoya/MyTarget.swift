@@ -1,33 +1,33 @@
 import Moya
 import Foundation
 
-public protocol Endpoint: TargetType {
-    associatedtype Target: Endpoint
+public protocol MyTarget: TargetType {
     var baseUrlString: String { get }
     var host: String { get }
-    var route: (Moya.Method, String, Moya.Task) { get }
-    static var provider: MoyaProvider<Target> { get }
+    var route: Route { get }
+    static var provider: MoyaProvider<Self> { get }
 }
 
-public extension Endpoint {
+public extension MyTarget {
     static var session: Session {
         Session()
     }
+    
     var baseURL: URL {
-        return URL(string: baseUrlString)!
+        URL(string: baseUrlString)!
             .appendingPathComponent(host)
     }
     
     var path: String {
-        route.1
+        route.path
     }
     
     var method: Moya.Method {
-        route.0
+        route.method
     }
     
     var task: Moya.Task {
-        route.2
+        route.task
     }
     
     var headers: [String: String]? {

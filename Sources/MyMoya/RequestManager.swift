@@ -3,22 +3,33 @@ import Moya
 import CombineMoya
 import Combine
 
-open class Service<Target: Endpoint> {
-    
-    private var allowLog: Bool = true
-    
-    public init(allowLog: Bool) {
-        self.allowLog = allowLog
-    }
-    
+public protocol RequestManager {
+    associatedtype _MyTarget: MyTarget
     func request<T: Decodable, ErrorRes: Decodable>(
-        _ target: Target.Target,
+        _ target: _MyTarget,
+        res: T.Type,
+        errorRes: ErrorRes.Type
+    ) -> AnyPublisher<T, APIError<ErrorRes>>
+    
+    func performRequest<T: Decodable, ErrorRes: ErrorResponse>(
+        _ target: _MyTarget,
+        res: T.Type,
+        errorRes: ErrorRes.Type
+    ) -> AnyPublisher<T, APIError<ErrorRes>>
+}
+
+public struct DefaultRequestManager<_MyTarget: MyTarget>: RequestManager {
+    
+    public typealias _MyTarget = _MyTarget
+    
+    public func request<T: Decodable, ErrorRes: Decodable>(
+        _ target: _MyTarget,
         res: T.Type,
         errorRes: ErrorRes.Type = EmptyErrorResponse.self
     ) -> AnyPublisher<T, APIError<ErrorRes>> {
         typealias APIErrorWithRes = APIError<ErrorRes>
         self.requestLog(target: target)
-        return Target.provider
+        return _MyTarget.provider
             .requestPublisher(target)
             .filterSuccessfulStatusCodes() // 200..<300
             .tryMap { result in // map response
@@ -60,7 +71,7 @@ open class Service<Target: Endpoint> {
     }
     
     public func performRequest<T: Decodable, ErrorRes: ErrorResponse>(
-        _ target: Target.Target,
+        _ target: _MyTarget,
         res: T.Type,
         errorRes: ErrorRes.Type = EmptyErrorResponse.self
     ) -> AnyPublisher<T, APIError<ErrorRes>> {
@@ -68,11 +79,8 @@ open class Service<Target: Endpoint> {
     }
 }
 
-private extension Service {
-    func requestLog(target: Target.Target) {
-        guard allowLog else {
-            return
-        }
+private extension RequestManager {
+    func requestLog(target: _MyTarget) {
         print("🛰 NETWORK Reqeust LOG")
         print(
             "URL: \(target.host)/\(target.path)\n"
@@ -92,10 +100,7 @@ private extension Service {
         }
     }
     
-    func responeLog(target: Target.Target, response: Moya.Response) {
-        guard allowLog else {
-            return
-        }
+    func responeLog(target: _MyTarget, response: Moya.Response) {
         print("🛰 NETWORK Response LOG")
         print(
             "URL: \(target.host)/\(target.path)" + "\n"
