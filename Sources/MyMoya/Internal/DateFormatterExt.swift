@@ -1,9 +1,0 @@
-import Foundation
-
-extension DateFormatter {
-    convenience init(_ dateFormat: String, locale: Locale = Locale(identifier: "ko_KR")) {
-        self.init()
-        self.dateFormat = dateFormat
-        self.locale = locale
-    }
-}

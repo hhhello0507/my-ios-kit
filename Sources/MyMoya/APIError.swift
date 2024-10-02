@@ -1,18 +1,8 @@
 import Foundation
 
-public protocol ErrorResponse: Decodable & Equatable {}
+public protocol ErrorResponse: Decodable {}
 
-public enum APIError<Res: ErrorResponse>: Error, Equatable {
-    public static func == (lhs: APIError, rhs: APIError) -> Bool {
-        switch (lhs, rhs) {
-        case (.http, .http): true
-        case (.httpWithResponse(let lhsRes), .httpWithResponse(let rhsRes)): lhsRes == rhsRes
-        case (.unknown, .unknown): true
-        case (.refreshFailure, .refreshFailure): true
-        default: false
-        }
-    }
-    
+public enum APIError<Res: ErrorResponse>: Error {
     case http
     case httpWithResponse(Res)
     case unknown

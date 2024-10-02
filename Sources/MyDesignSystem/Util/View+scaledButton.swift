@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct MyAnimationButton: ButtonStyle {
-    public func makeBody(configuration: Configuration) -> some View {
+    func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .addPressAnimation(configuration.isPressed)
     }
 }
 
-public extension View {
+extension View {
     
     func addPressAnimation(_ isPressed: Bool) -> some View {
         self

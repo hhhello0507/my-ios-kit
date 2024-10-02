@@ -3,26 +3,29 @@ import Moya
 import CombineMoya
 import Combine
 
-public protocol RequestManager {
+public protocol NetRunner {
     associatedtype _MyTarget: MyTarget
-    func request<T: Decodable, ErrorRes: Decodable>(
+    var allowLog: Bool { get }
+    func request<DTO: Decodable, ErrorRes: Decodable>(
         _ target: _MyTarget,
-        res: T.Type,
+        res: DTO.Type,
         errorRes: ErrorRes.Type
-    ) -> AnyPublisher<T, APIError<ErrorRes>>
+    ) -> AnyPublisher<DTO, APIError<ErrorRes>>
     
-    func performRequest<T: Decodable, ErrorRes: ErrorResponse>(
+    func performRequest<DTO: Decodable, ErrorRes: ErrorResponse>(
         _ target: _MyTarget,
-        res: T.Type,
+        res: DTO.Type,
         errorRes: ErrorRes.Type
-    ) -> AnyPublisher<T, APIError<ErrorRes>>
+    ) -> AnyPublisher<DTO, APIError<ErrorRes>>
 }
 
-public struct DefaultRequestManager<_MyTarget: MyTarget>: RequestManager {
-    
+public struct DefaultNetRunner<_MyTarget: MyTarget>: NetRunner {
     public typealias _MyTarget = _MyTarget
+    public let allowLog: Bool
     
-    public init() {}
+    public init(allowLog: Bool = true) {
+        self.allowLog = allowLog
+    }
     
     public func request<T: Decodable, ErrorRes: Decodable>(
         _ target: _MyTarget,
@@ -31,25 +34,29 @@ public struct DefaultRequestManager<_MyTarget: MyTarget>: RequestManager {
     ) -> AnyPublisher<T, APIError<ErrorRes>> {
         typealias APIErrorWithRes = APIError<ErrorRes>
         self.requestLog(target: target)
-        return _MyTarget.provider
+        return MoyaProvider<_MyTarget>()
             .requestPublisher(target)
             .filterSuccessfulStatusCodes() // 200..<300
-            .tryMap { result in // map response
+            .tryMap { (result: Moya.Response) throws -> T in // map response
                 let value: T
                 do {
                     value = try myDecoder.decode(T.self, from: result.data)
                 } catch {
-                   print("❌ Decoding Error - cause: \(error)")
+                    if allowLog {
+                        print("❌ Decoding Error - cause: \(error)")
+                    }
                    throw APIErrorWithRes.unknown
                 }
                 self.responeLog(target: target, response: result)
                 return value
             }
-            .mapError { error in // map error
+            .mapError { (error: Error) -> APIErrorWithRes in // map error
                 guard let error = error as? MoyaError,
                       let response = error.response else {
-                    print("❌ Unknown Error")
-                    return APIErrorWithRes.unknown
+                    if allowLog {
+                        print("❌ Unknown Error")
+                    }
+                    return .unknown
                 }
                 if case .underlying(let error, _) = error,
                    let error = error.asAFError,
@@ -60,13 +67,13 @@ public struct DefaultRequestManager<_MyTarget: MyTarget>: RequestManager {
                 self.responeLog(target: target, response: response)
                 
                 guard (errorRes as? EmptyErrorResponse.Type) == nil else {
-                    return APIErrorWithRes.http
+                    return .http
                 }
                 
                 guard let error = try? myDecoder.decode(ErrorRes.self, from: response.data) else {
-                    return APIErrorWithRes.decodingFailure
+                    return .decodingFailure
                 }
-                return APIErrorWithRes.httpWithResponse(error)
+                return .httpWithResponse(error)
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
@@ -81,8 +88,10 @@ public struct DefaultRequestManager<_MyTarget: MyTarget>: RequestManager {
     }
 }
 
-private extension RequestManager {
+// MARK: - Log
+private extension NetRunner {
     func requestLog(target: _MyTarget) {
+        guard allowLog else { return }
         print("🛰 NETWORK Reqeust LOG")
         print(
             "URL: \(target.host)/\(target.path)\n"
@@ -103,11 +112,21 @@ private extension RequestManager {
     }
     
     func responeLog(target: _MyTarget, response: Moya.Response) {
+        guard allowLog else { return }
         print("🛰 NETWORK Response LOG")
         print(
             "URL: \(target.host)/\(target.path)" + "\n"
             + "StatusCode: " + "\(response.response?.statusCode ?? 0)" + "\n"
             + "Data: \(response.data.toPrettyPrintedString ?? "")"
         )
+    }
+}
+
+private extension Data {
+    var toPrettyPrintedString: String? {
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return nil }
+        return prettyPrintedString as String
     }
 }

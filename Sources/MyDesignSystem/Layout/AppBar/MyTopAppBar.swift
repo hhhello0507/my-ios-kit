@@ -73,6 +73,15 @@ public struct MyTopAppBar<C, TC>: View where C: View, TC: View {
     }
 
     public var body: some View {
+        if #available(macOS 13.0, *) {
+            makeBody().navigationBarBackButtonHidden()
+        } else {
+            makeBody()
+        }
+    }
+    
+    @ViewBuilder
+    private func makeBody() -> some View {
         ZStack {
             // Background
             background.box.color
@@ -113,11 +122,6 @@ public struct MyTopAppBar<C, TC>: View where C: View, TC: View {
                 content(edgeInsets)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 Spacer()
-            }
-        }
-        .content { view in
-            if #available(macOS 13.0, *) {
-                view.navigationBarBackButtonHidden()
             }
         }
     }
