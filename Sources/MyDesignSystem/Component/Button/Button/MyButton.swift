@@ -13,6 +13,7 @@ public struct MyButton: View {
     private let isLoading: Bool
     private let isRounded: Bool
     private let isStroke: Bool
+    private let expanded: Bool
     private let action: () -> Void
     
     private var mergedEnabled: Bool {
@@ -27,17 +28,8 @@ public struct MyButton: View {
         }
     }
     
-    private var maxWidth: CGFloat? {
-        if case .larger(let expanded) = size,
-           expanded {
-            .infinity
-        } else {
-            nil
-        }
-    }
-    
     public init(
-        size: ButtonSize = .larger(expanded: true),
+        size: ButtonSize = .larger,
         _ text: String,
         role: ButtonRole = .primary,
         leadingIcon: Iconable? = nil,
@@ -47,6 +39,7 @@ public struct MyButton: View {
         isLoading: Bool = false,
         isRounded: Bool = false,
         isStroke: Bool = false,
+        expanded: Bool = false,
         action: @escaping () -> Void
     ) {
         self.size = size
@@ -59,6 +52,7 @@ public struct MyButton: View {
         self.isLoading = isLoading
         self.isRounded = isRounded
         self.isStroke = isStroke
+        self.expanded = expanded
         self.action = action
     }
     
@@ -72,7 +66,7 @@ public struct MyButton: View {
         action: @escaping () -> Void
     ) -> Self {
         Self.init(
-            size: .larger(expanded: false),
+            size: .larger,
             text,
             role: .text,
             leadingIcon: leadingIcon,
@@ -82,6 +76,7 @@ public struct MyButton: View {
             isLoading: isLoading,
             isRounded: false,
             isStroke: false,
+            expanded: false,
             action: action
         )
     }
@@ -98,6 +93,7 @@ public struct MyButton: View {
             isLoading: isLoading,
             isRounded: isRounded,
             isStroke: isStroke,
+            expanded: expanded,
             action: action
         )
     }
@@ -119,7 +115,7 @@ public struct MyButton: View {
                     makeIcon(icon: trailingIcon)
                 }
             }
-            .frame(maxWidth: maxWidth)
+            .frame(maxWidth: expanded ? .infinity : nil)
             .padding(.horizontal, size.horizontalPadding)
             .frame(height: size.height)
             .opacity(!isLoading ? 1 : 0)
@@ -155,16 +151,28 @@ private struct ButtonPreview: View {
                 }
                 ForEach(ButtonRole.allCases, id: \.self) { role in
                     VStack(spacing: 24) {
-                        ForEach(ButtonSize.allCases.filter { 
-                            if case .larger(let expanded) = $0, expanded {
-                                false
-                            } else {
-                                true
-                            }
-                        }, id: \.self) { size in
+                        ForEach(ButtonSize.allCases, id: \.self) { size in
                             VStack {
-                                MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank) {}.size(size)
-                                MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank, isLoading: true) {}.size(size)
+                                MyButton(
+                                    "Button",
+                                    role: role,
+                                    leadingIcon: Icons.ETC.Blank,
+                                    trailingIcon: Icons.ETC.Blank,
+                                    expanded: true
+                                ) {}.size(size)
+                                MyButton(
+                                    "Button",
+                                    role: role,
+                                    leadingIcon: Icons.ETC.Blank,
+                                    trailingIcon: Icons.ETC.Blank
+                                ) {}.size(size)
+                                MyButton(
+                                    "Button",
+                                    role: role,
+                                    leadingIcon: Icons.ETC.Blank,
+                                    trailingIcon: Icons.ETC.Blank,
+                                    isLoading: true
+                                ) {}.size(size)
                                 MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank, isEnabled: false) {}.size(size)
                                 MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank, isRounded: true) {}.size(size)
                                 MyButton("Button", role: role, leadingIcon: Icons.ETC.Blank, trailingIcon: Icons.ETC.Blank, isRounded: true, isStroke: true) {}.size(size)

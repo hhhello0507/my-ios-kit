@@ -2,14 +2,13 @@ import SwiftUI
 
 public enum ButtonSize: Hashable, CaseIterable {
     public static var allCases: [ButtonSize] = [
-        .larger(expanded: true),
-        .larger(expanded: false),
+        .larger,
         .large,
         .medium,
         .small
     ]
     
-    case larger(expanded: Bool)
+    case larger
     case large
     case medium
     case small
