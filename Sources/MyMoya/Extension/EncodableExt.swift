@@ -1,5 +1,6 @@
 import Foundation
 import Moya
+import MyFoundationUtil
 
 public extension Encodable {
     func toRequestParameters(encoding: ParameterEncoding, using encoder: JSONEncoder) -> Moya.Task {

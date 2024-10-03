@@ -17,7 +17,7 @@ let package = Package(
         ),
         .library(
             name: "MyShared",
-            targets: ["MyDateUtil"]
+            targets: ["MyFoundationUtil"]
         ),
         .executable(
             name: "MyIOSKitClient",
@@ -42,8 +42,8 @@ let package = Package(
             ]
         ),
         .target(
-            name: "MyDateUtil",
-            path: "Sources/MyShared/MyDateUtil"
+            name: "MyFoundationUtil",
+            path: "Sources/MyShared/MyFoundationUtil"
         ),
         .target(
             name: "MyUIKitExt",
@@ -54,7 +54,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Moya", package: "Moya"),
                 .product(name: "CombineMoya", package: "Moya"),
-                .target(name: "MyDateUtil")
+                .target(name: "MyFoundationUtil")
             ]
         ),
         .executableTarget(
@@ -62,7 +62,7 @@ let package = Package(
             dependencies: [
                 .target(name: "MyDesignSystem"),
                 .target(name: "MyMoya"),
-                .target(name: "MyDateUtil")
+                .target(name: "MyFoundationUtil")
             ]
         )
     ]
