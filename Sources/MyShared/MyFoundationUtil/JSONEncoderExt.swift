@@ -4,9 +4,9 @@ public extension JSONEncoder {
     static var myEncoder: JSONEncoder {
         let e = JSONEncoder()
         e.dateEncodingStrategy = .custom { date, encoder in
-            var container = encoder.singleValueContainer()
             let dateStr = DateFormatter(type: .isoDateTimeMilliSec).string(from: date)
-            try container.encode(date)
+            var container = encoder.singleValueContainer()
+            try container.encode(dateStr)
         }
         return e
     }
