@@ -1,4 +1,5 @@
 import SwiftUI
+import MyUIKitExt
 
 public protocol BottomAppBarItem: Equatable {
     var icon: Iconable { get }
@@ -37,10 +38,6 @@ public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarIte
         }
     }
     
-    #if canImport(UIKit)
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
-    #endif
-    
     @ViewBuilder
     private var bottomBarBar: some View {
         HStack(spacing: 0) {
@@ -59,7 +56,7 @@ public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarIte
             }
         }
         #if canImport(UIKit)
-        .padding(.bottom, safeAreaInsets.bottom)
+        .padding(.bottom, UIApplicationUtil.safeAreaInsets?.bottom)
         .onChange(of: selection) { _ in
             let impactMed = UIImpactFeedbackGenerator(style: .rigid)
             impactMed.impactOccurred()

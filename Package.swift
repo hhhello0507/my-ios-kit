@@ -33,7 +33,8 @@ let package = Package(
             name: "MyDesignSystem",
             dependencies: [
                 .product(name: "Nuke", package: "Nuke"),
-                .product(name: "NukeUI", package: "Nuke")
+                .product(name: "NukeUI", package: "Nuke"),
+                .target(name: "MyUIKitExt")
             ],
             resources: [
                 .process("Resource/Font"),
@@ -43,6 +44,10 @@ let package = Package(
         .target(
             name: "MyDateUtil",
             path: "Sources/MyShared/MyDateUtil"
+        ),
+        .target(
+            name: "MyUIKitExt",
+            path: "Sources/MyShared/MyUIKitExt"
         ),
         .target(
             name: "MyMoya",
