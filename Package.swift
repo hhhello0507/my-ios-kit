@@ -12,12 +12,12 @@ let package = Package(
             targets: ["MyDesignSystem"]
         ),
         .library(
-            name: "MyShared",
-            targets: ["MyShared"]
-        ),
-        .library(
             name: "MyMoya",
             targets: ["MyMoya"]
+        ),
+        .library(
+            name: "MyShared",
+            targets: ["MyDateUtil"]
         ),
         .executable(
             name: "MyIOSKitClient",
@@ -41,21 +41,23 @@ let package = Package(
             ]
         ),
         .target(
-            name: "MyShared",
-            dependencies: []
+            name: "MyDateUtil",
+            path: "Sources/MyShared/MyDateUtil"
         ),
         .target(
             name: "MyMoya",
             dependencies: [
                 .product(name: "Moya", package: "Moya"),
-                .product(name: "CombineMoya", package: "Moya")
+                .product(name: "CombineMoya", package: "Moya"),
+                .target(name: "MyDateUtil")
             ]
         ),
         .executableTarget(
             name: "MyIOSKitClient",
             dependencies: [
                 .target(name: "MyDesignSystem"),
-                .target(name: "MyShared")
+                .target(name: "MyMoya"),
+                .target(name: "MyDateUtil")
             ]
         )
     ]

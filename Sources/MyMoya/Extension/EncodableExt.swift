@@ -2,8 +2,8 @@ import Foundation
 import Moya
 
 public extension Encodable {
-    func toRequestParameters(encoding: ParameterEncoding) -> Moya.Task {
-        if let data = try? JSONEncoder().encode(self),
+    func toRequestParameters(encoding: ParameterEncoding, using encoder: JSONEncoder) -> Moya.Task {
+        if let data = try? encoder.encode(self),
            let object = (try? JSONSerialization.jsonObject(
             with: data,
             options: .allowFragments
@@ -22,11 +22,11 @@ public extension Encodable {
         return .requestPlain
     }
     
-    func toJSONParameters() -> Moya.Task {
-        toRequestParameters(encoding: JSONEncoding.default)
+    func toJSONParameters(using encoder: JSONEncoder = .myEncoder) -> Moya.Task {
+        toRequestParameters(encoding: JSONEncoding.default, using: encoder)
     }
     
-    func toURLParameters() -> Moya.Task {
-        toRequestParameters(encoding: URLEncoding.default)
+    func toURLParameters(using encoder: JSONEncoder = .myEncoder) -> Moya.Task {
+        toRequestParameters(encoding: URLEncoding.default, using: encoder)
     }
 }

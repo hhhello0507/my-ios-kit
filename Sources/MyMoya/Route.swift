@@ -6,6 +6,13 @@
 //
 import Moya
 
+/// Route
+/// Moya.TargetType에서 method, path, task를 추상화 한 struct
+///
+/// Ex.
+/// Route.get()
+/// Route.get("hello")
+/// Route.get("hello").task(.requestJSONEncodable(...))
 public struct Route {
     
     struct VoidRes: Decodable {}

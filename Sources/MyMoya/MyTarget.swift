@@ -1,6 +1,8 @@
 import Moya
 import Foundation
 
+/// MyTarget
+/// Moya.TargetType을 추상화한 protocol
 public protocol MyTarget: TargetType {
     var baseUrlString: String { get }
     var host: String { get }
