@@ -43,11 +43,11 @@ public struct MyDialogPresenter<C: View>: ModalViewProtocol {
                     HStack(spacing: 8) {
                         if let secondaryButton = dialog.secondaryButton {
                             if let primaryButton = dialog.primaryButton {
-                                MyButton(secondaryButton.title, role: .assistive) {
+                                MyButton(secondaryButton.title, role: .assistive, expanded: true) {
                                     secondaryButton.action()
                                     dismiss()
                                 }
-                                MyButton(primaryButton.title) {
+                                MyButton(primaryButton.title, expanded: true) {
                                     primaryButton.action()
                                     dismiss()
                                 }
