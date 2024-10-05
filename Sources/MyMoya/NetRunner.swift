@@ -8,66 +8,71 @@ import MyFoundationUtil
 /// NetRunner가 deinit 되면 provider도 deinit됨.
 /// provider가 deinit되면 request가 cancel됨.
 public protocol NetRunner {
-    associatedtype Target: MyTarget
-    
-    var provider: MoyaProvider<Target> { get }
+    var provider: MoyaProvider<AnyTarget> { get }
+    var authProvider: MoyaProvider<AnyTarget> { get }
     
     func deepDive<DTO: Decodable>(
-        _ target: Target,
+        _ target: MyTarget,
         res: DTO.Type,
-        using decoder: JSONDecoder,
         completion: @escaping (Result<DTO, MoyaError>) -> Void
     )
     
     func deepDive<DTO: Decodable>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) -> AnyPublisher<DTO, MoyaError>
     
     func deepDive<DTO: Decodable>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) -> AnyPublisher<Result<DTO, MoyaError>, Never>
     
     func deepDive<DTO: Decodable>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) async -> Result<DTO, MoyaError>
     
     func deepDive<DTO: Decodable>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) async throws -> DTO
 }
 
-public class DefaultNetRunner<Target: MyTarget>: NetRunner {
-    
-    public typealias _MyTarget = Target
-    
-    public let provider: MoyaProvider<Target>
+public class DefaultNetRunner: NetRunner {
+    public let provider: MoyaProvider<AnyTarget>
+    public let authProvider: MoyaProvider<AnyTarget>
+    public let decoder: JSONDecoder
     
     public init(
-        provider: MoyaProvider<Target> = .init()
+        provider: MoyaProvider<AnyTarget> = .init(),
+        authProvider: MoyaProvider<AnyTarget> = .init(),
+        decoder: JSONDecoder = .myDecoder
     ) {
         self.provider = provider
+        self.authProvider = authProvider
+        self.decoder = decoder
+    }
+    
+    private func selectProvider(_ target: MyTarget) -> MoyaProvider<AnyTarget> {
+        switch target.authorization {
+        case .none:
+            provider
+        case .refresh:
+            authProvider
+        }
     }
     
     public func deepDive<DTO>(
-        _ target: Target,
+        _ target: MyTarget,
         res: DTO.Type,
-        using decoder: JSONDecoder,
         completion: @escaping (Result<DTO, Moya.MoyaError>) -> Void
     ) where DTO : Decodable {
-        provider.request(target) { result in
+        selectProvider(target).request(AnyTarget(target)) { result in
             switch result {
             case .success(let response):
                 let response = self.unwrapThrowable {
                     try response.filterSuccessfulStatusCodes()
-                        .map(res, using: decoder)
+                        .map(res, using: self.decoder)
                 }
                 completion(response)
             case .failure(let error):
@@ -77,12 +82,11 @@ public class DefaultNetRunner<Target: MyTarget>: NetRunner {
     }
     
     public func deepDive<DTO: Decodable>(
-        _ target: _MyTarget,
-        res: DTO.Type,
-        using decoder: JSONDecoder = .myDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) -> AnyPublisher<DTO, MoyaError> {
-        return provider
-            .requestPublisher(target)
+        return selectProvider(target)
+            .requestPublisher(AnyTarget(target))
             .filterSuccessfulStatusCodes() // 200..<300
             .map(DTO.self, using: decoder)
             .receive(on: DispatchQueue.main)
@@ -90,12 +94,11 @@ public class DefaultNetRunner<Target: MyTarget>: NetRunner {
     }
     
     public func deepDive<DTO>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) -> AnyPublisher<Result<DTO, Moya.MoyaError>, Never> where DTO : Decodable {
-        return provider
-            .requestPublisher(target)
+        return selectProvider(target)
+            .requestPublisher(AnyTarget(target))
             .filterSuccessfulStatusCodes()
             .map(DTO.self, using: decoder)
             .map {  Result.success($0) }
@@ -105,28 +108,26 @@ public class DefaultNetRunner<Target: MyTarget>: NetRunner {
     }
     
     public func deepDive<DTO>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) async -> Result<DTO, MoyaError> where DTO : Decodable {
-        return await provider
-            .request(target)
+        return await selectProvider(target)
+            .request(AnyTarget(target))
             .flatMap { response in
                 unwrapThrowable {
                     try response
                         .filterSuccessfulStatusCodes()
-                        .map(res, using: decoder)
+                        .map(res, using: self.decoder)
                 }
             }
     }
     
     public func deepDive<DTO>(
-        _ target: Target,
-        res: DTO.Type,
-        using decoder: JSONDecoder
+        _ target: MyTarget,
+        res: DTO.Type
     ) async throws -> DTO where DTO : Decodable {
-        return try await provider
-            .request(target)
+        return try await selectProvider(target)
+            .request(AnyTarget(target))
             .filterSuccessfulStatusCodes()
             .map(res, using: decoder)
     }

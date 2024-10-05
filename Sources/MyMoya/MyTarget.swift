@@ -4,16 +4,12 @@ import Foundation
 /// MyTarget
 /// Moya.TargetType을 추상화한 protocol
 public protocol MyTarget: TargetType {
-    var baseUrlString: String { get }
     var host: String { get }
     var route: Route { get }
+    var authorization: Authorization { get }
 }
 
 public extension MyTarget {
-    var baseURL: URL {
-        URL(string: baseUrlString)!
-            .appendingPathComponent(host)
-    }
     
     /**
      Devide route
@@ -37,5 +33,8 @@ public extension MyTarget {
     }
     var validationType: ValidationType {
         .successCodes
+    }
+    var authorization: Authorization {
+        .refresh
     }
 }

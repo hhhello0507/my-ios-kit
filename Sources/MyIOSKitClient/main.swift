@@ -7,8 +7,8 @@ import Moya
 import Combine
 
 public enum MealEndpoint: MyTarget {
-    public var baseUrlString: String {
-        "http://15.164.12.91:1234"
+    public var baseURL: URL {
+        URL(string: "http://15.164.12.91:1234")!
     }
     
     case fetchMeals(schoolId: Int)
@@ -28,12 +28,12 @@ extension MealEndpoint {
 
 var sub = Set<AnyCancellable>()
 
-let run = DefaultNetRunner<MealEndpoint>()
+let run = DefaultNetRunner(provider: .init(), authProvider: .init())
 
 func request() {
     print("Net")
     run
-        .deepDive(.fetchMeals(schoolId: 1393), res: String.self)
+        .deepDive(MealEndpoint.fetchMeals(schoolId: 1393), res: String.self)
         .sink {
             print("Result : \($0)")
         } receiveValue: {
