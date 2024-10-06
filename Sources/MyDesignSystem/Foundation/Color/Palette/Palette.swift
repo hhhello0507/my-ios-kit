@@ -4,7 +4,7 @@ public protocol PaletteProtocol {
     var color: Color { get }
 }
 
-public enum Palette: CaseIterable {
+public enum Palette: Int, CaseIterable {
     case neutral
     case red
     case orange
