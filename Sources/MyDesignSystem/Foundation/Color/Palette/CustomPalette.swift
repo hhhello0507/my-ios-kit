@@ -106,6 +106,7 @@ extension CustomPalette {
         public var body: some View {
             content()
                 .id(update)
+                .environmentObject(provider)
         }
     }
 }
