@@ -18,6 +18,8 @@ extension CustomPalette {
     public final class Provider: ObservableObject {
         @Published var update: Bool = false
         
+        public init() {}
+        
         public func updateColor(
             pallete: Palette
         ) {
