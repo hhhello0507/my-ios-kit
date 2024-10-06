@@ -21,13 +21,8 @@ public extension CustomPalette {
         func updateColor(
             pallete: Palette
         ) {
-            let colors: [PaletteProtocol]
-            switch pallete {
-            case .red, .orange, .yellow, .green, .purple:
-                colors = pallete.allCases
-            default:
-                return
-            }
+            guard pallete.hasSaturation else { return }
+            let colors = pallete.allCases
             CustomPalette.primary99 = colors[0].color
             CustomPalette.primary95 = colors[1].color
             CustomPalette.primary90 = colors[2].color

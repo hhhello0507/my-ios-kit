@@ -13,6 +13,15 @@ public enum Palette: Int, CaseIterable {
     case blue
     case purple
     case common
+    
+    public var hasSaturation: Bool {
+        switch self {
+        case .neutral, .common:
+            false
+        default:
+            true
+        }
+    }
 
     public var allCases: [PaletteProtocol] {
         switch self {
