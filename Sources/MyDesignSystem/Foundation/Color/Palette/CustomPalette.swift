@@ -14,11 +14,11 @@ public enum CustomPalette {
     public static var primary10 = Palette.Blue.blue10.color
 }
 
-public extension CustomPalette {
-    final class Provider: ObservableObject {
+extension CustomPalette {
+    public final class Provider: ObservableObject {
         @Published var update: Bool = false
         
-        func updateColor(
+        public func updateColor(
             pallete: Palette
         ) {
             guard pallete.hasSaturation else { return }
@@ -37,7 +37,7 @@ public extension CustomPalette {
             update.toggle()
         }
         
-        func updateColor(
+        public func updateColor(
             primary99: PaletteProtocol? = nil,
             primary95: PaletteProtocol? = nil,
             primary90: PaletteProtocol? = nil,
@@ -87,7 +87,7 @@ public extension CustomPalette {
         }
     }
     
-    struct Presenter<C: View>: View {
+    public struct Presenter<C: View>: View {
         @ObservedObject private var provider: Provider
         @State private var update: Bool = false
         
