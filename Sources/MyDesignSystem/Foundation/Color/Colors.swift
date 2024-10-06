@@ -15,6 +15,11 @@ public protocol Colorable {
 public struct ColorBox {
     public let light: Color
     public let dark: Color
+    public init(_ light: PaletteProtocol, _ dark: PaletteProtocol) {
+        self.light = light.color
+        self.dark = dark.color
+    }
+    
     public init(_ light: Color, _ dark: Color) {
         self.light = light
         self.dark = dark
@@ -22,16 +27,17 @@ public struct ColorBox {
 }
 
 public enum Colors {
+    private typealias P = Palette
     public enum Label: Colorable, CaseIterable {
         case normal, strong, neutral, alternative, assistive, disable
         public var box: ColorBox {
             switch self {
-            case .normal: ColorBox(Palette.neutral5, Palette.neutral99)
-            case .strong: ColorBox(Palette.common100, Palette.common00)
-            case .neutral: ColorBox(Palette.neutral25, Palette.neutral95)
-            case .alternative: ColorBox(Palette.neutral40, Palette.neutral90)
-            case .assistive: ColorBox(Palette.neutral50, Palette.neutral70)
-            case .disable: ColorBox(Palette.neutral97, Palette.neutral30)
+            case .normal: ColorBox(P.Neutral.neutral5, P.Neutral.neutral99)
+            case .strong: ColorBox(P.Common.common100, P.Common.common00)
+            case .neutral: ColorBox(P.Neutral.neutral25, P.Neutral.neutral95)
+            case .alternative: ColorBox(P.Neutral.neutral40, P.Neutral.neutral90)
+            case .assistive: ColorBox(P.Neutral.neutral50, P.Neutral.neutral70)
+            case .disable: ColorBox(P.Neutral.neutral97, P.Neutral.neutral30)
             }
         }
     }
@@ -39,9 +45,9 @@ public enum Colors {
         case normal, neutral, alternative
         public var box: ColorBox {
             switch self {
-            case .normal: ColorBox(Palette.neutral90, Palette.neutral50)
-            case .neutral: ColorBox(Palette.neutral95, Palette.neutral30)
-            case .alternative: ColorBox(Palette.neutral97, Palette.neutral25)
+            case .normal: ColorBox(P.Neutral.neutral90, P.Neutral.neutral50)
+            case .neutral: ColorBox(P.Neutral.neutral95, P.Neutral.neutral30)
+            case .alternative: ColorBox(P.Neutral.neutral97, P.Neutral.neutral25)
             }
         }
     }
@@ -49,10 +55,10 @@ public enum Colors {
         case normal, neutral, alternative, assistive
         public var box: ColorBox {
             switch self {
-            case .normal: ColorBox(Palette.neutral97, Palette.neutral20)
-            case .neutral: ColorBox(Palette.neutral95, Palette.neutral25)
-            case .alternative: ColorBox(Palette.neutral90, Palette.neutral30)
-            case .assistive: ColorBox(Palette.common00, Palette.neutral60)
+            case .normal: ColorBox(P.Neutral.neutral97, P.Neutral.neutral20)
+            case .neutral: ColorBox(P.Neutral.neutral95, P.Neutral.neutral25)
+            case .alternative: ColorBox(P.Neutral.neutral90, P.Neutral.neutral30)
+            case .assistive: ColorBox(P.Common.common00, P.Neutral.neutral60)
             }
         }
     }
@@ -60,9 +66,9 @@ public enum Colors {
         case normal, neutral, alternative
         public var box: ColorBox {
             switch self {
-            case .normal: ColorBox(Palette.common00, Palette.neutral15)
-            case .neutral: ColorBox(Palette.neutral99, Palette.neutral10)
-            case .alternative: ColorBox(Palette.neutral99, Palette.neutral7)
+            case .normal: ColorBox(P.Common.common00, P.Neutral.neutral15)
+            case .neutral: ColorBox(P.Neutral.neutral99, P.Neutral.neutral10)
+            case .alternative: ColorBox(P.Neutral.neutral99, P.Neutral.neutral7)
             }
         }
     }
@@ -80,8 +86,8 @@ public enum Colors {
         case white, black, clear
         public var box: ColorBox {
             switch self {
-            case .white: ColorBox(Palette.common00, Palette.common00)
-            case .black: ColorBox(Palette.common100, Palette.common100)
+            case .white: ColorBox(P.Common.common00, P.Common.common00)
+            case .black: ColorBox(P.Common.common100, P.Common.common100)
             case .clear: ColorBox(.clear, .clear)
             }
         }
@@ -100,9 +106,9 @@ public enum Colors {
         case negative, cautionary, positive
         public var box: ColorBox {
             switch self {
-            case .negative: ColorBox(Palette.red50, Palette.red50)
-            case .cautionary: ColorBox(Palette.yellow50, Palette.yellow50)
-            case .positive: ColorBox(Palette.green50, Palette.green50)
+            case .negative: ColorBox(P.Red.red50, P.Red.red50)
+            case .cautionary: ColorBox(P.Yellow.yellow50, P.Yellow.yellow50)
+            case .positive: ColorBox(P.Green.green50, P.Green.green50)
             }
         }
     }

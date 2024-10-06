@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 
 public extension ColorBox {
-    public var color: Color {
+    var color: Color {
         Color(UIColor {
             if $0.userInterfaceStyle == .dark {
                 UIColor(dark)
