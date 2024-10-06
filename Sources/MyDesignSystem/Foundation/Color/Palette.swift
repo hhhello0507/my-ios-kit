@@ -38,19 +38,19 @@ public enum Palette {
     public static let red10 = Color(0x2F0404)
     
     /*
-     Green Color
+     Orange Color
      */
-    public static let green99 = Color(0xFBFEFB)
-    public static let green95 = Color(0xE8FCEA)
-    public static let green90 = Color(0xD2F9D6)
-    public static let green80 = Color(0xA6F2AD)
-    public static let green70 = Color(0x79EC85)
-    public static let green60 = Color(0x4DE55C)
-    public static let green50 = Color(0x20DF33)
-    public static let green40 = Color(0x0FBD21)
-    public static let green30 = Color(0x0B8E18)
-    public static let green20 = Color(0x085E10)
-    public static let green10 = Color(0x042F08)
+    public static let orange99 = Color(0xFFFDFA)
+    public static let orange95 = Color(0xFEF5E6)
+    public static let orange90 = Color(0xFEEACD)
+    public static let orange80 = Color(0xFCD69C)
+    public static let orange70 = Color(0xFBC16A)
+    public static let orange60 = Color(0xFAAC38)
+    public static let orange50 = Color(0xF99806)
+    public static let orange40 = Color(0xC77905)
+    public static let orange30 = Color(0x955B04)
+    public static let orange20 = Color(0x633D03)
+    public static let orange10 = Color(0x321E01)
     
     /*
      Yellow Color
@@ -68,6 +68,21 @@ public enum Palette {
     public static let yellow10 = Color(0x332900)
     
     /*
+     Green Color
+     */
+    public static let green99 = Color(0xFBFEFB)
+    public static let green95 = Color(0xE8FCEA)
+    public static let green90 = Color(0xD2F9D6)
+    public static let green80 = Color(0xA6F2AD)
+    public static let green70 = Color(0x79EC85)
+    public static let green60 = Color(0x4DE55C)
+    public static let green50 = Color(0x20DF33)
+    public static let green40 = Color(0x0FBD21)
+    public static let green30 = Color(0x0B8E18)
+    public static let green20 = Color(0x085E10)
+    public static let green10 = Color(0x042F08)
+    
+    /*
      Blue Color
      */
     public static let blue99 = Color(0xFAFDFF)
@@ -81,6 +96,21 @@ public enum Palette {
     public static let blue30 = Color(0x005399)
     public static let blue20 = Color(0x003866)
     public static let blue10 = Color(0x001C33)
+    
+    /*
+     Purple Color
+     */
+    public static let purple99 = Color(0xFCFAFF)
+    public static let purple95 = Color(0xF1E6FE)
+    public static let purple90 = Color(0xE3CDFE)
+    public static let purple80 = Color(0xC79CFC)
+    public static let purple70 = Color(0xAB6AFB)
+    public static let purple60 = Color(0x8F38FA)
+    public static let purple50 = Color(0x7306F9)
+    public static let purple40 = Color(0x5C05C7)
+    public static let purple30 = Color(0x450495)
+    public static let purple20 = Color(0x2E0363)
+    public static let purple10 = Color(0x170132)
     
     /*
      Common
@@ -104,31 +134,117 @@ public enum CustomPalette {
 }
 
 #Preview {
-    
-    let data = [
-        Palette.neutral99,
-        Palette.neutral97,
-        Palette.neutral95,
-        Palette.neutral90,
-        Palette.neutral80,
-        Palette.neutral70,
-        Palette.neutral60,
-        Palette.neutral50,
-        Palette.neutral40,
-        Palette.neutral30,
-        Palette.neutral25,
-        Palette.neutral20,
-        Palette.neutral15,
-        Palette.neutral10,
-        Palette.neutral7,
-        Palette.neutral5
+    let colors: [[Color]] = [
+        [
+            Palette.neutral99,
+            Palette.neutral97,
+            Palette.neutral95,
+            Palette.neutral90,
+            Palette.neutral80,
+            Palette.neutral70,
+            Palette.neutral60,
+            Palette.neutral50,
+            Palette.neutral40,
+            Palette.neutral30,
+            Palette.neutral25,
+            Palette.neutral20,
+            Palette.neutral15,
+            Palette.neutral10,
+            Palette.neutral7,
+            Palette.neutral5
+        ],
+        [
+            Palette.red99,
+            Palette.red95,
+            Palette.red90,
+            Palette.red80,
+            Palette.red70,
+            Palette.red60,
+            Palette.red50,
+            Palette.red40,
+            Palette.red30,
+            Palette.red20,
+            Palette.red10
+        ],
+        [
+            Palette.orange99,
+            Palette.orange95,
+            Palette.orange90,
+            Palette.orange80,
+            Palette.orange70,
+            Palette.orange60,
+            Palette.orange50,
+            Palette.orange40,
+            Palette.orange30,
+            Palette.orange20,
+            Palette.orange10
+        ],
+        [
+            Palette.yellow99,
+            Palette.yellow95,
+            Palette.yellow90,
+            Palette.yellow80,
+            Palette.yellow70,
+            Palette.yellow60,
+            Palette.yellow50,
+            Palette.yellow40,
+            Palette.yellow30,
+            Palette.yellow20,
+            Palette.yellow10
+        ],
+        [
+            Palette.green99,
+            Palette.green95,
+            Palette.green90,
+            Palette.green80,
+            Palette.green70,
+            Palette.green60,
+            Palette.green50,
+            Palette.green40,
+            Palette.green30,
+            Palette.green20,
+            Palette.green10
+        ],
+        [
+            Palette.blue99,
+            Palette.blue95,
+            Palette.blue90,
+            Palette.blue80,
+            Palette.blue70,
+            Palette.blue60,
+            Palette.blue50,
+            Palette.blue40,
+            Palette.blue30,
+            Palette.blue20,
+            Palette.blue10
+        ],
+        [
+            Palette.purple99,
+            Palette.purple95,
+            Palette.purple90,
+            Palette.purple80,
+            Palette.purple70,
+            Palette.purple60,
+            Palette.purple50,
+            Palette.purple40,
+            Palette.purple30,
+            Palette.purple20,
+            Palette.purple10
+        ]
     ]
     
     return (
         ScrollView {
-            VStack(spacing: 0) {
-                ForEach(data, id: \.self) {
-                    $0.frame(height: 30)
+            LazyVStack(spacing: 0) {
+                ForEach(colors, id: \.self) { row in
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 0) {
+                            ForEach(row, id: \.self) {
+                                $0.frame(width: 40, height: 60)
+                                    .padding(.vertical, 8)
+                            }
+                        }
+                    }
                 }
             }
         }
