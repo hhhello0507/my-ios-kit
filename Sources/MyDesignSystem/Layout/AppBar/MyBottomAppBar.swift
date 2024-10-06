@@ -81,32 +81,27 @@ struct Item: BottomAppBarItem {
     var text: String
 }
 
-private struct BottomAppBarPreview: View {
-    
-    private let data = [
-        Item(id: 1, icon: Icons.ETC.Blank, text: "Tab"),
-        Item(id: 2, icon: Icons.ETC.Blank, text: "Tab"),
-        Item(id: 3, icon: Icons.ETC.Blank, text: "Tab"),
-        Item(id: 4, icon: Icons.ETC.Blank, text: "Tab"),
-        Item(id: 5, icon: Icons.ETC.Blank, text: "Tab")
-    ]
-    
-    @State private var selection = Item(id: 1, icon: Icons.Feature.Home, text: "홈")
-    
-    var body: some View {
-        MyBottomAppBar(data, selection: selection) { item in
-            selection = item
-        } content: {
-            EmptyView()
+#Preview {
+    struct BottomAppBarPreview: View {
+        private let data = [
+            Item(id: 1, icon: Icons.ETC.Blank, text: "Tab"),
+            Item(id: 2, icon: Icons.ETC.Blank, text: "Tab"),
+            Item(id: 3, icon: Icons.ETC.Blank, text: "Tab"),
+            Item(id: 4, icon: Icons.ETC.Blank, text: "Tab"),
+            Item(id: 5, icon: Icons.ETC.Blank, text: "Tab")
+        ]
+        
+        @State private var selection = Item(id: 1, icon: Icons.Feature.Home, text: "홈")
+        
+        var body: some View {
+            MyBottomAppBar(data, selection: selection) { item in
+                selection = item
+            } content: {
+                EmptyView()
+            }
         }
     }
-}
-
-#Preview {
-    BottomAppBarPreview()
-}
-
-#Preview {
-    BottomAppBarPreview()
-        .preferredColorScheme(.dark)
+    
+    return BottomAppBarPreview()
+        .registerWanted()
 }

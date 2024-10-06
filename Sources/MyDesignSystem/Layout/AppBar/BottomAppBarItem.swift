@@ -14,7 +14,7 @@ struct MyBottomAppBarItem<Item>: View where Item: BottomAppBarItem {
     }
     
     var body: some View {
-        let color: Colorable = isSelected ? Colors.Primary.normal : Colors.Line.normal
+        let color: Colorable = isSelected ? Colors.Primary.normal : Colors.Label.assistive
         HStack {
             Spacer()
             VStack(spacing: 0) {
@@ -28,6 +28,7 @@ struct MyBottomAppBarItem<Item>: View where Item: BottomAppBarItem {
                     .foreground(color)
             }
             .padding(.vertical, 4)
+            .opacity(isSelected ? 1 : 0.5)
             Spacer()
         }
     }
