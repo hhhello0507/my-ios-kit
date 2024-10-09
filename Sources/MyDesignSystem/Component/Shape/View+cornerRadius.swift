@@ -5,7 +5,12 @@ public extension View {
         clipShape(RoundedCornerShape(radius: radius, corners: corners))
     }
     
-    func stroke<Content>(_ radius: CGFloat, corners: RoundedCornerShape.RectCorner = .allCorners, content: Content, lineWidth: CGFloat = 1) -> some View where Content: ShapeStyle {
+    func stroke<Content>(
+        _ radius: CGFloat,
+        corners: RoundedCornerShape.RectCorner = .allCorners,
+        content: Content,
+        lineWidth: CGFloat = 1
+    ) -> some View where Content: ShapeStyle {
         let roundedCorner = RoundedCornerShape(radius: radius, corners: corners)
         return self
             .clipShape(roundedCorner)
@@ -15,7 +20,12 @@ public extension View {
             }
     }
     
-    func stroke(_ radius: CGFloat, corners: RoundedCornerShape.RectCorner = .allCorners, color: Colorable, lineWidth: CGFloat = 1) -> some View {
+    func stroke(
+        _ radius: CGFloat,
+        corners: RoundedCornerShape.RectCorner = .allCorners,
+        color: Colorable,
+        lineWidth: CGFloat = 1
+    ) -> some View {
         let roundedCorner = RoundedCornerShape(radius: radius, corners: corners)
         return self
             .clipShape(roundedCorner)

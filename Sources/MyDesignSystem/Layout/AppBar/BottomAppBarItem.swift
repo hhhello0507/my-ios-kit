@@ -1,15 +1,15 @@
 import SwiftUI
 
-struct MyBottomAppBarItem<Item>: View where Item: BottomAppBarItem {
+struct MyBottomAppBarItem: View {
     
-    private let type: Item
+    private let page: Page
     private let isSelected: Bool
     
     init(
-        type: Item,
+        page: Page,
         isSelected: Bool
     ) {
-        self.type = type
+        self.page = page
         self.isSelected = isSelected
     }
     
@@ -18,12 +18,12 @@ struct MyBottomAppBarItem<Item>: View where Item: BottomAppBarItem {
         HStack {
             Spacer()
             VStack(spacing: 0) {
-                Image(icon: type.icon)
+                Image(icon: page.icon)
                     .resizable()
                     .renderingMode(.template)
                     .foreground(color)
                     .frame(width: 28, height: 28)
-                Text(type.text)
+                Text(page.text)
                     .font(.wanted(.Regular, size: 10))
                     .foreground(color)
             }

@@ -1,103 +1,81 @@
 import SwiftUI
 import MyUIKitExt
 
-public protocol BottomAppBarItem: Equatable {
-    var icon: Iconable { get }
-    var text: String { get }
-}
-
 @available(iOS 13.0, macOS 12.0, *)
-public struct MyBottomAppBar<C, Item>: View where C: View, Item: BottomAppBarItem {
-    
-    private let data: [Item]
-    private let selection: Item
-    private let onTap: (Item) -> Void
-    private let content: () -> C
+public struct MyBottomAppBar: View {
+    @Binding private var selection: Int
+    private let pages: [Page]
     
     public init(
-        _ data: [Item],
-        selection: Item,
-        onTap: @escaping (Item) -> Void,
-        @ViewBuilder content: @escaping () -> C
+        selection: Binding<Int>,
+        @Page.Builder pages: () -> [Page]
     ) {
-        self.data = data
-        self.selection = selection
-        self.onTap = onTap
-        self.content = content
+        self._selection = selection
+        self.pages = pages()
     }
     
     public var body: some View {
-        ZStack {
-            content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            VStack(spacing: 0) {
-                Spacer()
-                bottomBarBar
+        VStack(spacing: 0) {
+            ZStack {
+                ForEach(pages.indices, id: \.self) { index in
+                    pages[index].content
+                        .opacity(index == selection ? 1 : 0)
+                }
             }
-            .ignoresSafeArea()
+            Divider()
+                .foreground(Colors.Line.alternative)
+            bottomBarBar
         }
     }
     
     @ViewBuilder
     private var bottomBarBar: some View {
         HStack(spacing: 0) {
-            ForEach(data.indices, id: \.self) { idx in
-                let tab = data[idx]
+            ForEach(pages.indices, id: \.self) { idx in
+                let page = pages[idx]
+                let selected = selection == idx
                 Button {
-                    if selection != tab {
-                        onTap(tab)
+                    if !selected {
+                        selection = idx
                     }
                 } label: {
-                    MyBottomAppBarItem(type: tab, isSelected: selection == tab)
+                    MyBottomAppBarItem(page: page, isSelected: selected)
                         .frame(maxWidth: .infinity)
                         .background(Colors.Background.neutral)
                 }
                 .scaledButton()
             }
         }
-        #if canImport(UIKit)
-        .padding(.bottom, UIApplicationUtil.safeAreaInsets?.bottom)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 8)
+        .padding(.horizontal, -1)
+        .padding(.bottom, -1)
+        .background(Colors.Background.neutral)
+#if canImport(UIKit)
         .onChange(of: selection) { _ in
             let impactMed = UIImpactFeedbackGenerator(style: .rigid)
             impactMed.impactOccurred()
         }
-        #endif
-        .padding(.vertical, 8)
-        .padding(.horizontal, 8)
-        .background(Colors.Background.neutral)
-        .stroke(0, content: Colors.Line.alternative.box.color)
-        .padding(.horizontal, -1)
-        .padding(.bottom, -1)
+#endif
     }
-}
-
-struct Item: BottomAppBarItem {
-    static func == (lhs: Item, rhs: Item) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    var id: Int
-    var icon: Iconable
-    var text: String
 }
 
 #Preview {
     struct BottomAppBarPreview: View {
-        private let data = [
-            Item(id: 1, icon: Icons.ETC.Blank, text: "Tab"),
-            Item(id: 2, icon: Icons.ETC.Blank, text: "Tab"),
-            Item(id: 3, icon: Icons.ETC.Blank, text: "Tab"),
-            Item(id: 4, icon: Icons.ETC.Blank, text: "Tab"),
-            Item(id: 5, icon: Icons.ETC.Blank, text: "Tab")
-        ]
-        
-        @State private var selection = Item(id: 1, icon: Icons.Feature.Home, text: "홈")
+        @State private var selection = 0
         
         var body: some View {
-            MyBottomAppBar(data, selection: selection) { item in
-                selection = item
-            } content: {
+            MyBottomAppBar(selection: $selection) {
+                Text("WOW")
+                    .page(icon: Icons.ETC.Blank, text: "Tab")
+                Color.blue
+                    .page(icon: Icons.ETC.Blank, text: "Tab")
+                Color.orange
+                    .page(icon: Icons.ETC.Blank, text: "Tab")
                 EmptyView()
+                    .page(icon: Icons.ETC.Blank, text: "Tab")
+                EmptyView()
+                    .page(icon: Icons.ETC.Blank, text: "Tab")
             }
         }
     }
