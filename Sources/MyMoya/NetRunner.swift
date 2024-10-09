@@ -89,7 +89,6 @@ public class DefaultNetRunner: NetRunner {
             .requestPublisher(AnyTarget(target))
             .filterSuccessfulStatusCodes() // 200..<300
             .map(DTO.self, using: decoder)
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
@@ -103,7 +102,6 @@ public class DefaultNetRunner: NetRunner {
             .map(DTO.self, using: decoder)
             .map {  Result.success($0) }
             .catch { Just(Result.failure($0)) }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
