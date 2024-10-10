@@ -27,7 +27,7 @@ public extension Date {
         Calendar.current.dateComponents(components, from: self, to: other).date!
     }
     
-    subscript(components: Calendar.Component) -> Int? {
-        Calendar.current.dateComponents([components], from: self).value(for: components)
+    subscript(components: Calendar.Component) -> Int {
+        Calendar.current.dateComponents([components], from: self).value(for: components)!
     }
 }
