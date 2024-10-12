@@ -120,8 +120,7 @@ public struct MyTopAppBar<C, TC>: View where C: View, TC: View {
                 .background(background)
                 .padding(.horizontal, 4)
                 content(edgeInsets)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                Spacer()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
         }
     }
